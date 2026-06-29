@@ -38,6 +38,10 @@ Quy trình đúng:
 5. Đợi CI `Package build / build` pass.
 6. Cần ít nhất 1 review trước khi merge.
 
+Repo đã bật `delete_branch_on_merge`, nên branch của PR merged sẽ tự xóa. Nếu PR
+bị đóng mà không merge, workflow `Cleanup closed PR branches` sẽ tự xóa branch
+đó khi branch nằm trong cùng repo.
+
 Ví dụ:
 
 ```bash
