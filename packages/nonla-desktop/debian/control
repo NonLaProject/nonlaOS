@@ -1,7 +1,7 @@
 Source: nonla-desktop
 Section: metapackages
 Priority: optional
-Maintainer: Le Hung Quang Minh <maintainers@nonlaos.local>
+Maintainer: Le Hung Quang Minh <nonlaproject@users.noreply.github.com>
 Build-Depends: debhelper-compat (= 13)
 Standards-Version: 4.7.0
 Rules-Requires-Root: no
@@ -28,4 +28,5 @@ Depends:
  fcitx5-unikey,
  ufw
 Description: nonlaOS desktop metapackage
- Installs the default nonlaOS desktop stack based on Debian stable and KDE Plasma.
+ Installs the default nonlaOS desktop stack based on Debian stable and KDE
+ Plasma.

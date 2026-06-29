@@ -1,5 +1,5 @@
 # nonla-welcome
 
-Placeholder cho ung dung chao mung cua nonlaOS.
+Placeholder cho ứng dụng chào mừng của nonlaOS.
 
-MVP hien tai chua co GUI. Package nay chi giu cho de build va cai dat sau nay.
+MVP hiện tại chưa có GUI. Package này chỉ giữ chỗ để build và cài đặt sau này.

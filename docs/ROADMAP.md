@@ -3,24 +3,24 @@
 ## 0.1 alpha
 
 - Debian stable + KDE Plasma.
-- nonla look co ban.
-- Ho tro tieng Viet va bo go.
+- nonla look cơ bản.
+- Hỗ trợ tiếng Việt và bộ gõ.
 - Calamares.
-- ISO boot/install duoc.
+- ISO boot/install được.
 
 ## 0.5 beta
 
-- APT repo rieng.
+- APT repo riêng.
 - Welcome app.
-- Tai lieu co ban.
-- Update hoat dong qua APT.
-- Test tren may that.
+- Tài liệu cơ bản.
+- Update hoạt động qua APT.
+- Test trên máy thật.
 
 ## 1.0 stable
 
-- Dung hang ngay on dinh.
-- License sach.
-- Update khong lam vo he thong.
+- Dùng hằng ngày ổn định.
+- License sạch.
+- Update không làm vỡ hệ thống.
 
 ## 2.0
 

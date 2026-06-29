@@ -1,19 +1,43 @@
 # nonlaOS
 
-nonlaOS la du an Linux desktop tieng Viet dua tren Debian stable, dung KDE Plasma, huong toi nguoi chuyen tu Windows sang Linux.
+nonlaOS là dự án Linux desktop tiếng Việt dựa trên Debian stable, dùng KDE
+Plasma, hướng tới người chuyển từ Windows sang Linux.
 
-MVP 0.1 tap trung vao nen tang toi thieu:
+MVP 0.1 tập trung vào nền tảng tối thiểu:
 
-- Debian stable lam base.
-- KDE Plasma lam desktop mac dinh.
-- Cai dat tieng Viet, bo go, font va ung dung desktop co ban.
-- nonla look vua du de nhan dien rieng.
-- Calamares de cai dat he thong.
-- ISO boot/install duoc, duoc tao bang package + repo + live-build.
+- Debian stable làm base.
+- KDE Plasma làm desktop mặc định.
+- Cài đặt tiếng Việt, bộ gõ, font và ứng dụng desktop cơ bản.
+- nonla look vừa đủ để nhận diện riêng.
+- Calamares để cài đặt hệ thống.
+- ISO boot/install được, được tạo bằng package + repo + live-build.
 
-Nguyen tac:
+Nguyên tắc:
 
-- Khong dua phan mem lau, crack, keygen hoac asset khong ro license vao he thong.
-- Khong sua ISO thu cong.
-- Moi thay doi he thong phai duoc package hoa de co the build lai va kiem soat bang APT.
-- Build package, repo va ISO phai huong toi reproducible.
+- Không đưa phần mềm lậu, crack, keygen hoặc asset không rõ license vào hệ
+  thống.
+- Không sửa ISO thủ công.
+- Mọi thay đổi hệ thống phải được package hóa để có thể build lại và kiểm soát
+  bằng APT.
+- Build package, repo và ISO phải hướng tới reproducible.
+
+## Build packages
+
+Trên Debian/WSL, cài dependency build:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y devscripts dpkg-dev debhelper lintian
+```
+
+Build toàn bộ package skeleton:
+
+```bash
+./tools/build-packages.sh
+```
+
+Output nằm trong:
+
+```text
+dist/packages/
+```

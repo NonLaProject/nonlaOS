@@ -1,7 +1,7 @@
 Source: nonla-repo-keyring
 Section: misc
 Priority: optional
-Maintainer: Le Hung Quang Minh <maintainers@nonlaos.local>
+Maintainer: Le Hung Quang Minh <nonlaproject@users.noreply.github.com>
 Build-Depends: debhelper-compat (= 13)
 Standards-Version: 4.7.0
 Rules-Requires-Root: no
