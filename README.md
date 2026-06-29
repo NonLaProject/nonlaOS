@@ -1,5 +1,7 @@
 # nonlaOS
 
+[![Package build](https://github.com/NonLaProject/nonlaOS/actions/workflows/package-build.yml/badge.svg)](https://github.com/NonLaProject/nonlaOS/actions/workflows/package-build.yml)
+
 nonlaOS là dự án Linux desktop tiếng Việt dựa trên Debian stable, dùng KDE
 Plasma, hướng tới người chuyển từ Windows sang Linux.
 
@@ -56,3 +58,18 @@ dist/packages/
 
 Đây là lớp nhận diện ban đầu để package hóa giao diện, chưa phải UI/theme hoàn
 chỉnh.
+
+## Tài liệu
+
+- [Roadmap](docs/ROADMAP.md)
+- [Testing checklist](docs/TESTING.md)
+- [Packaging notes](docs/PACKAGING_NOTES.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
+
+## License
+
+- Source code, packaging metadata và tài liệu: MIT, xem [LICENSE](LICENSE).
+- Asset hình ảnh nội bộ trong `img/` và payload theme: CC-BY-SA-4.0, xem
+  [NOTICE](NOTICE) và `debian/copyright` của từng package.

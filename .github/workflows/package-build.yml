@@ -1,0 +1,37 @@
+name: Package build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y devscripts dpkg-dev debhelper lintian
+
+      - name: Build packages
+        run: ./tools/build-packages.sh
+
+      - name: Lint packages
+        run: lintian dist/packages/*.deb
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: nonlaos-packages
+          path: |
+            dist/packages/*.deb
+            dist/packages/*.changes
+            dist/packages/*.buildinfo

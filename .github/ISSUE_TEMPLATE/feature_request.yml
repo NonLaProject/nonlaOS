@@ -1,0 +1,34 @@
+name: Feature request
+description: Đề xuất tính năng hoặc package mới
+title: "feat: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Vấn đề cần giải quyết
+      description: Tính năng này giúp ai, trong workflow nào?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Đề xuất
+      description: Mô tả giải pháp mong muốn.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Nêu rõ phần nào không nằm trong đề xuất này.
+  - type: checkboxes
+    id: policy
+    attributes:
+      label: Chính sách repo
+      options:
+        - label: Không yêu cầu phần mềm lậu, crack hoặc asset không rõ license.
+          required: true
+        - label: Có thể package hóa thay đổi, không cần sửa ISO thủ công.
+          required: true

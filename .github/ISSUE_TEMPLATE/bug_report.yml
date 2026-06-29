@@ -1,0 +1,45 @@
+name: Bug report
+description: Báo lỗi build, package hoặc desktop payload
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Tóm tắt
+      description: Lỗi là gì?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Bước tái hiện
+      description: Ghi các bước ngắn gọn để tái hiện lỗi.
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log
+      description: Dán log liên quan, ví dụ build/lint/systemd/journal.
+      render: text
+  - type: input
+    id: commit
+    attributes:
+      label: Commit hoặc package version
+      placeholder: "ví dụ: 1438a4a hoặc nonla-look 0.1.0"
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Môi trường
+      options:
+        - Debian
+        - WSL Debian
+        - VM
+        - Máy thật
+        - Khác
