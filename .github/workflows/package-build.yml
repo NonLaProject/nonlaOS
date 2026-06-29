@@ -19,7 +19,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y devscripts dpkg-dev debhelper lintian
+          sudo apt-get install -y build-essential devscripts dpkg-dev debhelper lintian
 
       - name: Build packages
         run: ./tools/build-packages.sh
