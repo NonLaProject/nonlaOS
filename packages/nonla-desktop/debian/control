@@ -1,0 +1,31 @@
+Source: nonla-desktop
+Section: metapackages
+Priority: optional
+Maintainer: Le Hung Quang Minh <maintainers@nonlaos.local>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+
+Package: nonla-desktop
+Architecture: all
+Depends:
+ ${misc:Depends},
+ kde-plasma-desktop,
+ sddm,
+ calamares,
+ firefox-esr,
+ libreoffice,
+ dolphin,
+ konsole,
+ kate,
+ okular,
+ ark,
+ gwenview,
+ fonts-noto,
+ fonts-noto-cjk,
+ fonts-noto-color-emoji,
+ fcitx5,
+ fcitx5-unikey,
+ ufw
+Description: nonlaOS desktop metapackage
+ Installs the default nonlaOS desktop stack based on Debian stable and KDE Plasma.

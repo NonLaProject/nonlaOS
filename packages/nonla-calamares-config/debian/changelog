@@ -1,0 +1,5 @@
+nonla-calamares-config (0.1.0) unstable; urgency=medium
+
+  * Initial Calamares configuration package skeleton.
+
+ -- Le Hung Quang Minh <maintainers@nonlaos.local>  Mon, 29 Jun 2026 00:00:00 +0700

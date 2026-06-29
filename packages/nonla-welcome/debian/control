@@ -1,0 +1,13 @@
+Source: nonla-welcome
+Section: misc
+Priority: optional
+Maintainer: Le Hung Quang Minh <maintainers@nonlaos.local>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+
+Package: nonla-welcome
+Architecture: all
+Depends: ${misc:Depends}
+Description: nonlaOS welcome application placeholder
+ Provides a placeholder package for the future nonlaOS welcome application.

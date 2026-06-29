@@ -1,0 +1,13 @@
+Source: nonla-calamares-config
+Section: misc
+Priority: optional
+Maintainer: Le Hung Quang Minh <maintainers@nonlaos.local>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+
+Package: nonla-calamares-config
+Architecture: all
+Depends: ${misc:Depends}, calamares
+Description: nonlaOS Calamares configuration skeleton
+ Provides the package foundation for nonlaOS installer configuration and branding.

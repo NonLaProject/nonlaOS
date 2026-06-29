@@ -1,0 +1,13 @@
+Source: nonla-look
+Section: x11
+Priority: optional
+Maintainer: Le Hung Quang Minh <maintainers@nonlaos.local>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+
+Package: nonla-look
+Architecture: all
+Depends: ${misc:Depends}
+Description: nonlaOS visual look skeleton
+ Provides the package foundation for wallpapers, themes, SDDM, and Plymouth assets.

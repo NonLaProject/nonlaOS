@@ -1,0 +1,13 @@
+Source: nonla-default-settings
+Section: misc
+Priority: optional
+Maintainer: Le Hung Quang Minh <maintainers@nonlaos.local>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+
+Package: nonla-default-settings
+Architecture: all
+Depends: ${misc:Depends}
+Description: nonlaOS default settings skeleton
+ Provides the package foundation for default user, KDE, and input method settings.
