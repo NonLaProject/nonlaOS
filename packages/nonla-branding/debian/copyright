@@ -6,6 +6,17 @@ Files: *
 Copyright: 2026 nonlaOS contributors
 License: GPL-3+
 
+Files:
+ payload/usr/share/nonlaos/branding/boot_logo.png
+ payload/usr/share/nonlaos/branding/launcher_icon.png
+ payload/usr/share/pixmaps/nonlaos.png
+ payload/usr/share/icons/hicolor/256x256/apps/nonlaos.png
+Copyright: 2026 nonlaOS contributors
+License: CC-BY-SA-4.0
+Comment:
+ These are internal nonlaOS project assets copied or derived from the
+ repository's img/ directory.
+
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify it under
  the terms of the GNU General Public License as published by the Free Software
@@ -18,3 +29,18 @@ License: GPL-3+
  .
  On Debian systems, the complete text of the GNU General Public License
  version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+License: CC-BY-SA-4.0
+ Creative Commons Attribution-ShareAlike 4.0 International.
+ .
+ You are free to share and adapt the material for any purpose, even
+ commercially, under the following terms:
+ .
+ Attribution - You must give appropriate credit, provide a link to the license,
+ and indicate if changes were made.
+ .
+ ShareAlike - If you remix, transform, or build upon the material, you must
+ distribute your contributions under the same license as the original.
+ .
+ The full license text is available at
+ https://creativecommons.org/licenses/by-sa/4.0/legalcode

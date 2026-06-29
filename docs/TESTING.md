@@ -35,3 +35,14 @@
 - [ ] `fcitx5` chạy sau khi login.
 - [ ] Gõ tiếng Việt được bằng FCITX5 Unikey.
 - [ ] User đã tồn tại trước đó không bị ghi đè cấu hình.
+
+## Branding Checklist
+
+- [ ] Cài `nonla-branding`.
+- [ ] Kiểm tra `/usr/share/nonlaos/branding/nonlaos-release`.
+- [ ] Kiểm tra `/usr/share/nonlaos/branding/boot_logo.png`.
+- [ ] Kiểm tra `/usr/share/nonlaos/branding/launcher_icon.png`.
+- [ ] Kiểm tra `/usr/share/pixmaps/nonlaos.png`.
+- [ ] Kiểm tra `/usr/share/icons/hicolor/256x256/apps/nonlaos.png`.
+- [ ] Dry-run cài `nonla-desktop` và xác nhận kéo `nonla-branding`,
+  `nonla-look`, `nonla-default-settings`.

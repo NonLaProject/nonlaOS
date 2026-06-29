@@ -55,9 +55,23 @@ artwork/                     Không gian chuẩn bị cho artwork source sau nà
 
 ## Package hiện có
 
-`nonla-desktop` là metapackage kéo desktop stack KDE Plasma cơ bản, gồm SDDM,
-Calamares, Firefox ESR, LibreOffice, Dolphin, Konsole, Kate, Okular, Ark,
-Gwenview, Noto fonts, FCITX5 Unikey và UFW.
+`nonla-desktop` là metapackage kéo desktop stack KDE Plasma cơ bản cùng các
+package nhận diện/cấu hình của nonlaOS. Nó phụ thuộc vào `nonla-branding`,
+`nonla-look`, `nonla-default-settings`, SDDM, Calamares, Firefox ESR,
+LibreOffice, Dolphin, Konsole, Kate, Okular, Ark, Gwenview, Noto fonts, FCITX5,
+FCITX5 Unikey và UFW. Package `kcm-fcitx5` được khai báo `Recommends` vì tên gói
+có thể khác nhau giữa các nhánh Debian hoặc mirror.
+
+`nonla-branding` ship logo, icon và metadata nhận diện riêng của nonlaOS:
+
+- `/usr/share/nonlaos/branding/nonlaos-release`
+- `/usr/share/nonlaos/branding/boot_logo.png`
+- `/usr/share/nonlaos/branding/launcher_icon.png`
+- `/usr/share/pixmaps/nonlaos.png`
+- `/usr/share/icons/hicolor/256x256/apps/nonlaos.png`
+
+Package này chưa thay thế `/etc/os-release` hoặc `/usr/lib/os-release`; phần đó
+sẽ xử lý riêng trong ISO/live-build hoặc package `base-files` riêng sau này.
 
 `nonla-look` là payload nhận diện đầu tiên của nonlaOS. Package này dùng asset
 nội bộ từ `img/` để ship:
