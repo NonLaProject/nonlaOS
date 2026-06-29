@@ -70,6 +70,7 @@ chỉnh.
 
 ## License
 
-- Source code, packaging metadata và tài liệu: MIT, xem [LICENSE](LICENSE).
-- Asset hình ảnh nội bộ trong `img/` và payload theme: CC-BY-SA-4.0, xem
+- Source code, packaging metadata và tài liệu: `GPL-3.0-or-later`, xem
+  [LICENSE](LICENSE).
+- Artwork/asset nội bộ trong `img/` và payload theme: `CC-BY-SA-4.0`, xem
   [NOTICE](NOTICE) và `debian/copyright` của từng package.

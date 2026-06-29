@@ -5,7 +5,8 @@ and project-owned visual assets for nonlaOS.
 
 Unless stated otherwise:
 
-- Source code and packaging files are licensed under the MIT License.
+- Source code, packaging files, and documentation are licensed under
+  GPL-3.0-or-later.
 - Project artwork and raster assets under `img/` and package payload copies are
   licensed under CC-BY-SA-4.0.
 

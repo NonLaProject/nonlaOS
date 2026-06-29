@@ -4,7 +4,7 @@
     "Name": "nonlaOS",
     "Description": "Initial nonlaOS Plasma look and feel",
     "Version": "0.1.0",
-    "License": "MIT",
+    "License": "GPL-3.0-or-later",
     "Authors": [
       {
         "Name": "nonlaOS contributors"
