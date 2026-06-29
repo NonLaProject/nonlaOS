@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="img/boot_logo.png" alt="nonlaOS logo" width="420">
+  <img src="img/readme_logo.png" alt="nonlaOS logo" width="560">
 </p>
 
 # nonlaOS
