@@ -23,3 +23,15 @@
 - [ ] `lintian dist/packages/*.deb` không có error nghiêm trọng.
 - [ ] Cài thử package bằng `apt install ./dist/packages/*.deb` hoặc
   `dpkg -i dist/packages/*.deb`.
+
+## Default Settings Checklist
+
+- [ ] Cài `nonla-look` và `nonla-default-settings`.
+- [ ] Tạo user mới sau khi package đã được cài.
+- [ ] Login KDE bằng user mới.
+- [ ] Wallpaper nonla được áp dụng.
+- [ ] Color scheme `Nonla` được áp dụng.
+- [ ] Panel Plasma cơ bản xuất hiện và launcher dùng icon `nonlaos`.
+- [ ] `fcitx5` chạy sau khi login.
+- [ ] Gõ tiếng Việt được bằng FCITX5 Unikey.
+- [ ] User đã tồn tại trước đó không bị ghi đè cấu hình.

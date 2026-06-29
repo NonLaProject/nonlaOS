@@ -1,0 +1,3 @@
+This directory is intentionally created by nonla-default-settings so future
+per-user desktop data can be seeded through /etc/skel without touching existing
+home directories.

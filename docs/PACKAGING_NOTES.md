@@ -6,7 +6,7 @@ Cài các package cần thiết:
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y devscripts dpkg-dev debhelper lintian
+sudo apt-get install -y build-essential devscripts dpkg-dev debhelper lintian
 ```
 
 Build toàn bộ package:
@@ -29,7 +29,6 @@ Các warning `empty-binary-package` hiện được chấp nhận cho:
 
 - `nonla-branding`
 - `nonla-calamares-config`
-- `nonla-default-settings`
 - `nonla-repo-keyring`
 - `nonla-welcome`
 
@@ -39,3 +38,16 @@ các warning này phải biến mất thay vì bị ignore lâu dài.
 
 `nonla-look` đã có payload thật đầu tiên nên không còn nằm trong nhóm warning
 `empty-binary-package`.
+
+`nonla-default-settings` đã có payload thật đầu tiên cho `/etc/skel` và
+`/etc/environment.d`, nên không còn nằm trong nhóm warning
+`empty-binary-package`.
+
+## Lintian overrides
+
+`nonla-default-settings` override tag `package-contains-file-in-etc-skel` cho
+các file cấu hình trong `/etc/skel`.
+
+Lý do: package này có mục tiêu rõ ràng là seed cấu hình KDE/FCITX5 cho user mới
+của distro. Cách này không ghi đè cấu hình user hiện có và tránh maintainer
+script sửa home directory runtime.

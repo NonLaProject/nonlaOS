@@ -1,0 +1,9 @@
+[General]
+ColorScheme=Nonla
+Name=Nonla
+
+[Icons]
+Theme=breeze
+
+[KDE]
+LookAndFeelPackage=org.nonlaos.desktop

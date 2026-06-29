@@ -8,7 +8,7 @@ Rules-Requires-Root: no
 
 Package: nonla-default-settings
 Architecture: all
-Depends: ${misc:Depends}
-Description: nonlaOS default settings skeleton
- Provides the package foundation for default user, KDE, and input method
- settings.
+Depends: ${misc:Depends}, fcitx5, fcitx5-unikey
+Recommends: nonla-look
+Description: nonlaOS default settings
+ Provides default KDE Plasma and input method settings for new nonlaOS users.
