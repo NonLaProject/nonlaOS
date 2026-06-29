@@ -69,6 +69,17 @@ nội bộ từ `img/` để ship:
 - Plymouth theme skeleton
 - icon app `nonlaos`
 
+`nonla-default-settings` ship cấu hình mặc định cho user mới:
+
+- seed KDE Plasma config qua `/etc/skel`
+- đặt wallpaper `nonla-default` và color scheme `Nonla`
+- seed panel Plasma cơ bản với launcher icon `nonlaos`
+- bật FCITX5 qua `/etc/environment.d/90-nonla-input.conf`
+- autostart FCITX5 và seed profile ưu tiên Unikey
+
+Package này chỉ áp dụng cho user được tạo sau khi package đã cài. Nó không ghi
+đè home directory hoặc config của user hiện có.
+
 Các package còn lại hiện là skeleton có chủ đích để giữ ownership packaging cho
 các bước tiếp theo.
 
