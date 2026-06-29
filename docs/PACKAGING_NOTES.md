@@ -27,7 +27,6 @@ lintian dist/packages/*.deb
 
 Các warning `empty-binary-package` hiện được chấp nhận cho:
 
-- `nonla-branding`
 - `nonla-calamares-config`
 - `nonla-repo-keyring`
 - `nonla-welcome`
@@ -42,6 +41,15 @@ các warning này phải biến mất thay vì bị ignore lâu dài.
 `nonla-default-settings` đã có payload thật đầu tiên cho `/etc/skel` và
 `/etc/environment.d`, nên không còn nằm trong nhóm warning
 `empty-binary-package`.
+
+`nonla-branding` đã có payload thật đầu tiên cho logo, icon và metadata nhận
+diện riêng của nonlaOS, nên không còn nằm trong nhóm warning
+`empty-binary-package`.
+
+`nonla-desktop` giữ `fcitx5` và `fcitx5-unikey` trong `Depends`, nhưng đặt
+`kcm-fcitx5` trong `Recommends`. Lý do: trên môi trường Debian/WSL hiện tại,
+`kcm-fcitx5` không có candidate installable, nên đưa vào `Depends` sẽ làm
+metapackage không cài được dù input method core vẫn có.
 
 ## Lintian overrides
 

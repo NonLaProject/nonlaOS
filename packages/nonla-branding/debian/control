@@ -9,5 +9,6 @@ Rules-Requires-Root: no
 Package: nonla-branding
 Architecture: all
 Depends: ${misc:Depends}
-Description: nonlaOS branding skeleton
- Provides the package foundation for nonlaOS branding files.
+Description: nonlaOS branding assets and metadata
+ Provides nonlaOS branding assets, application icons, and release metadata that
+ can be consumed by desktop integration and ISO build tooling.

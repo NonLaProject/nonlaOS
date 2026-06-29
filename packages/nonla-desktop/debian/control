@@ -10,6 +10,9 @@ Package: nonla-desktop
 Architecture: all
 Depends:
  ${misc:Depends},
+ nonla-branding,
+ nonla-look,
+ nonla-default-settings,
  kde-plasma-desktop,
  sddm,
  calamares,
@@ -27,6 +30,8 @@ Depends:
  fcitx5,
  fcitx5-unikey,
  ufw
+Recommends:
+ kcm-fcitx5
 Description: nonlaOS desktop metapackage
- Installs the default nonlaOS desktop stack based on Debian stable and KDE
- Plasma.
+ Installs the default nonlaOS desktop stack, branding, look and default
+ settings based on Debian stable and KDE Plasma.

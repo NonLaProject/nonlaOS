@@ -1,0 +1,9 @@
+NAME="nonlaOS"
+ID=nonlaos
+ID_LIKE=debian
+PRETTY_NAME="nonlaOS 0.1 Alpha"
+VERSION_ID="0.1"
+VERSION_CODENAME="alpha"
+HOME_URL="https://github.com/NonLaProject/nonlaOS"
+SUPPORT_URL="https://github.com/NonLaProject/nonlaOS/issues"
+BUG_REPORT_URL="https://github.com/NonLaProject/nonlaOS/issues"
