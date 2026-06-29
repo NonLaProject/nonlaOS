@@ -1,0 +1,11 @@
+[SddmGreeterTheme]
+Name=nonla
+Description=Initial nonlaOS SDDM theme
+Author=nonlaOS contributors
+Copyright=Copyright 2026 nonlaOS contributors
+License=MIT
+Type=sddm-theme
+Version=0.1.0
+Website=https://example.invalid/nonlaos
+MainScript=Main.qml
+ConfigFile=theme.conf

@@ -41,3 +41,18 @@ Output nằm trong:
 ```text
 dist/packages/
 ```
+
+## nonla-look
+
+`nonla-look` dùng các asset nội bộ từ `img/` để đóng gói payload nhận diện
+đầu tiên của nonlaOS:
+
+- wallpaper KDE
+- KDE color scheme `Nonla`
+- Plasma look-and-feel skeleton
+- SDDM theme skeleton
+- Plymouth theme skeleton
+- icon app `nonlaos`
+
+Đây là lớp nhận diện ban đầu để package hóa giao diện, chưa phải UI/theme hoàn
+chỉnh.

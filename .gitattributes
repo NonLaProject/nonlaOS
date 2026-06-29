@@ -1,7 +1,15 @@
 * text=auto
 
+.gitattributes text eol=lf
 *.md text eol=lf
 *.sh text eol=lf
+*.png binary
+*.colors text eol=lf
+*.desktop text eol=lf
+*.qml text eol=lf
+*.plymouth text eol=lf
 debian/* text eol=lf
 packages/*/debian/* text eol=lf
 packages/*/debian/source/* text eol=lf
+packages/*/payload/** text eol=lf
+packages/*/payload/**/*.png binary

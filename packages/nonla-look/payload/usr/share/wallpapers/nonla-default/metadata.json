@@ -1,0 +1,14 @@
+{
+  "KPlugin": {
+    "Id": "nonla-default",
+    "Name": "nonlaOS Default",
+    "Description": "Default nonlaOS wallpaper",
+    "License": "CC-BY-SA-4.0",
+    "Authors": [
+      {
+        "Name": "nonlaOS contributors"
+      }
+    ]
+  },
+  "KPackageStructure": "Wallpaper/Images"
+}

@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=nonla
+Description=Initial nonlaOS boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/nonla
+ScriptFile=/usr/share/plymouth/themes/nonla/nonla.script

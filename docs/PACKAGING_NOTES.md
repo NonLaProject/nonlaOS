@@ -30,10 +30,12 @@ Các warning `empty-binary-package` hiện được chấp nhận cho:
 - `nonla-branding`
 - `nonla-calamares-config`
 - `nonla-default-settings`
-- `nonla-look`
 - `nonla-repo-keyring`
 - `nonla-welcome`
 
 Lý do: các package này đang là skeleton để giữ ownership packaging, chưa ship
 payload thật. Khi thêm branding, cấu hình, theme, keyring hoặc welcome app thật,
 các warning này phải biến mất thay vì bị ignore lâu dài.
+
+`nonla-look` đã có payload thật đầu tiên nên không còn nằm trong nhóm warning
+`empty-binary-package`.

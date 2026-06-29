@@ -23,7 +23,8 @@ for package_dir in "${PACKAGES_DIR}"/*; do
 
     build_package_dir="${WORK_DIR}/${package_name}"
     cp -R "${package_dir}" "${build_package_dir}"
-    find "${build_package_dir}/debian" -type f -exec chmod 0644 {} +
+    find "${build_package_dir}" -type d -exec chmod 0755 {} +
+    find "${build_package_dir}" -type f -exec chmod 0644 {} +
     chmod 0755 "${build_package_dir}/debian/rules"
 
     (

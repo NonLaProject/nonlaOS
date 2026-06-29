@@ -1,0 +1,15 @@
+{
+  "KPlugin": {
+    "Id": "org.nonlaos.desktop",
+    "Name": "nonlaOS",
+    "Description": "Initial nonlaOS Plasma look and feel",
+    "Version": "0.1.0",
+    "License": "MIT",
+    "Authors": [
+      {
+        "Name": "nonlaOS contributors"
+      }
+    ]
+  },
+  "KPackageStructure": "Plasma/LookAndFeel"
+}

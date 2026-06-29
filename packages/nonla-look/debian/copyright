@@ -6,6 +6,18 @@ Files: *
 Copyright: 2026 Le Hung Quang Minh
 License: MIT
 
+Files:
+ payload/usr/share/wallpapers/nonla-default/contents/images/1672x941.png
+ payload/usr/share/sddm/themes/nonla/wallpaper.png
+ payload/usr/share/sddm/themes/nonla/boot_logo.png
+ payload/usr/share/plymouth/themes/nonla/boot_logo.png
+ payload/usr/share/icons/hicolor/256x256/apps/nonlaos.png
+Copyright: 2026 nonlaOS contributors
+License: CC-BY-SA-4.0
+Comment:
+ These are internal nonlaOS project assets copied from the repository's img/
+ directory.
+
 License: MIT
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -24,3 +36,18 @@ License: MIT
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
+
+License: CC-BY-SA-4.0
+ Creative Commons Attribution-ShareAlike 4.0 International.
+ .
+ You are free to share and adapt the material for any purpose, even
+ commercially, under the following terms:
+ .
+ Attribution - You must give appropriate credit, provide a link to the license,
+ and indicate if changes were made.
+ .
+ ShareAlike - If you remix, transform, or build upon the material, you must
+ distribute your contributions under the same license as the original.
+ .
+ The full license text is available at
+ https://creativecommons.org/licenses/by-sa/4.0/legalcode
