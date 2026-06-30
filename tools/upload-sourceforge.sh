@@ -22,7 +22,7 @@ if [[ -z "${SOURCEFORGE_USER:-}" || -z "${SOURCEFORGE_PROJECT:-}" ]]; then
     exit 0
 fi
 
-RELEASE_PATH="${SOURCEFORGE_RELEASE_PATH:-/home/frs/project/${SOURCEFORGE_PROJECT}/nonlaOS/0.1-alpha/}"
+RELEASE_PATH="${SOURCEFORGE_RELEASE_PATH:-/home/frs/project/${SOURCEFORGE_PROJECT}/}"
 
 for file in "${ISO_DIR}/${ISO_NAME}" "${ISO_DIR}/SHA256SUMS" "${ISO_DIR}/SHA256SUMS.gpg"; do
     if [[ ! -f "${file}" ]]; then
@@ -33,9 +33,6 @@ done
 
 require_tool rsync rsync
 require_tool ssh openssh-client
-
-printf -v quoted_release_path '%q' "${RELEASE_PATH}"
-ssh "${SOURCEFORGE_USER}@${SOURCEFORGE_HOST}" "mkdir -p ${quoted_release_path}"
 
 rsync -av --progress \
     "${ISO_DIR}/${ISO_NAME}" \

@@ -199,8 +199,12 @@ gh secret set SOURCEFORGE_RELEASE_PATH
 Mặc định:
 
 ```text
-/home/frs/project/${SOURCEFORGE_PROJECT}/nonlaOS/0.1-alpha/
+/home/frs/project/${SOURCEFORGE_PROJECT}/
 ```
+
+SourceForge FRS dùng restricted shell, nên script không tự tạo thư mục release
+bằng SSH. Nếu muốn upload vào subfolder như `nonlaOS/0.1-alpha/`, hãy tạo folder
+đó trước trong SourceForge UI rồi set `SOURCEFORGE_RELEASE_PATH`.
 
 ## Build ISO
 
@@ -245,7 +249,7 @@ artifacts, chỉ bỏ qua public upload.
 Tải từ SourceForge sau khi upload:
 
 ```text
-https://sourceforge.net/projects/YOUR_SOURCEFORGE_PROJECT/files/nonlaOS/0.1-alpha/
+https://sourceforge.net/projects/YOUR_SOURCEFORGE_PROJECT/files/
 ```
 
 Verify checksum ISO:
