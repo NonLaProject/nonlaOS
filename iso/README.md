@@ -49,3 +49,8 @@ NONLA_LB_SECURITY=true ./tools/build-iso.sh
 Script cũng dùng `--apt-indices false` vì live-build từ Ubuntu runner hiện tìm
 `Contents-amd64.gz` theo layout cũ không còn khớp Debian trixie. Điều này không
 ảnh hưởng mục tiêu MVP là build ISO live có `nonla-desktop`.
+
+Với cùng lý do tương thích, script patch runtime helper
+`/usr/lib/live/build/lb_chroot_linux-image` trên runner nếu helper đó vẫn trỏ
+tới `dists/trixie/Contents-amd64.gz`. Patch chỉ đổi đường dẫn sang layout hiện
+tại `dists/trixie/main/Contents-amd64.gz`.
