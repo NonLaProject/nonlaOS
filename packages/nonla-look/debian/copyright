@@ -11,7 +11,6 @@ Files:
  payload/usr/share/sddm/themes/nonla/wallpaper.png
  payload/usr/share/sddm/themes/nonla/boot_logo.png
  payload/usr/share/plymouth/themes/nonla/boot_logo.png
- payload/usr/share/icons/hicolor/256x256/apps/nonlaos.png
 Copyright: 2026 nonlaOS contributors
 License: CC-BY-SA-4.0
 Comment:
