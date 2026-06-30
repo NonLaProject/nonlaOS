@@ -90,6 +90,7 @@ printf '%s\n' "${REPO_SOURCE}" > "${LIVE_WORK_DIR}/config/archives/nonla-local.l
         --architectures "${LB_ARCH}" \
         --binary-images iso-hybrid \
         --archive-areas main \
+        --apt-indices false \
         --apt-recommends true \
         --debian-installer false \
         --security "${LB_SECURITY}" \

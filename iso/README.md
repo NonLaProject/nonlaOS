@@ -45,3 +45,7 @@ có thể bật lại:
 ```bash
 NONLA_LB_SECURITY=true ./tools/build-iso.sh
 ```
+
+Script cũng dùng `--apt-indices false` vì live-build từ Ubuntu runner hiện tìm
+`Contents-amd64.gz` theo layout cũ không còn khớp Debian trixie. Điều này không
+ảnh hưởng mục tiêu MVP là build ISO live có `nonla-desktop`.
