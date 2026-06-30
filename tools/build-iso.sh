@@ -14,6 +14,7 @@ LB_REPO_MODE="${NONLA_LB_REPO_MODE:-http}"
 LB_REPO_PORT="${NONLA_LB_REPO_PORT:-18080}"
 LB_REPO_COMPONENT="${NONLA_REPO_COMPONENT:-main}"
 LB_REPO_SUITE="${NONLA_REPO_SUITE:-stable}"
+LB_SECURITY="${NONLA_LB_SECURITY:-false}"
 
 require_tool() {
     local tool="$1"
@@ -91,6 +92,7 @@ printf '%s\n' "${REPO_SOURCE}" > "${LIVE_WORK_DIR}/config/archives/nonla-local.l
         --archive-areas main \
         --apt-recommends true \
         --debian-installer false \
+        --security "${LB_SECURITY}" \
         --iso-application "nonlaOS 0.1 Alpha" \
         --iso-publisher "nonlaOS" \
         --iso-volume "nonlaOS 0.1 Alpha ${LB_ARCH}"

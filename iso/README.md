@@ -36,3 +36,12 @@ APT trong chroot live-build đọc được repo local. Có thể ép dùng `fil
 ```bash
 NONLA_LB_REPO_MODE=file ./tools/build-iso.sh
 ```
+
+Trên GitHub Actions, security archive của live-build đang tắt mặc định bằng
+`NONLA_LB_SECURITY=false` để tránh Ubuntu runner sinh URL Debian security cũ
+kiểu `trixie/updates`. Khi chuyển sang runner Debian/live-build đồng bộ hơn,
+có thể bật lại:
+
+```bash
+NONLA_LB_SECURITY=true ./tools/build-iso.sh
+```
