@@ -65,3 +65,7 @@ runner.
 
 ISO hybrid vẫn cần lệnh `isohybrid` ở bước binary cuối, nên workflow cài đủ bộ
 `syslinux`/`syslinux-utils` và script kiểm tra dependency này từ đầu.
+
+Script đặt `--build-with-chroot false` để bước tạo ISO chạy bằng tool trên host
+runner. Nếu để binary stage chạy trong chroot, một số bản live-build cũ sẽ sinh
+`binary.sh` gọi `isohybrid` nhưng chroot không có binary đó.
