@@ -43,6 +43,21 @@ cleanup_http_server() {
     fi
 }
 
+patch_live_build_contents_path() {
+    local helper="/usr/lib/live/build/lb_chroot_linux-image"
+
+    if [[ ! -f "${helper}" ]]; then
+        return
+    fi
+
+    if grep -q 'dists/${LB_DISTRIBUTION}/Contents-${LB_ARCHITECTURES}.gz' "${helper}"; then
+        run_as_root sed -i \
+            -e 's#dists/${LB_PARENT_DISTRIBUTION}/Contents-${LB_ARCHITECTURES}.gz#dists/${LB_PARENT_DISTRIBUTION}/main/Contents-${LB_ARCHITECTURES}.gz#g' \
+            -e 's#dists/${LB_DISTRIBUTION}/Contents-${LB_ARCHITECTURES}.gz#dists/${LB_DISTRIBUTION}/main/Contents-${LB_ARCHITECTURES}.gz#g' \
+            "${helper}"
+    fi
+}
+
 require_tool lb live-build
 require_tool python3 python3
 require_tool tee coreutils
@@ -51,6 +66,7 @@ cd "${ROOT_DIR}"
 
 ./tools/build-packages.sh
 ./tools/make-repo.sh
+patch_live_build_contents_path
 
 run_as_root rm -rf "${LIVE_WORK_DIR}"
 mkdir -p "${LIVE_WORK_DIR}" "${ISO_DIR}" "${LOG_DIR}"
