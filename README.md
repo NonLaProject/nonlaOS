@@ -187,7 +187,10 @@ Workflow chính:
 .github/workflows/build-iso.yml
 ```
 
-Workflow này cài dependency build, chạy:
+Workflow chạy trên `ubuntu-latest`, nhưng bước build ISO chạy trong container
+`debian:trixie` có quyền `--privileged` để live-build khớp Debian stable/trixie
+thay vì dùng bản live-build của Ubuntu runner. Bên trong container, workflow cài
+dependency build rồi chạy:
 
 ```bash
 ./tools/build-iso.sh
