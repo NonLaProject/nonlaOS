@@ -47,6 +47,7 @@ jobs:
                 genisoimage \
                 xorriso \
                 grub-efi-amd64-bin \
+                grub-efi-ia32-bin \
                 grub-pc-bin \
                 isolinux \
                 syslinux \
