@@ -61,6 +61,7 @@ patch_live_build_contents_path() {
 require_tool lb live-build
 require_tool python3 python3
 require_tool tee coreutils
+require_tool isohybrid syslinux-utils
 
 cd "${ROOT_DIR}"
 

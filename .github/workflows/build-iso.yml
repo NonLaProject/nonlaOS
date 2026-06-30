@@ -38,6 +38,9 @@ jobs:
             grub-efi-amd64-bin \
             grub-pc-bin \
             isolinux \
+            syslinux \
+            syslinux-common \
+            syslinux-efi \
             syslinux-utils \
             squashfs-tools
 
