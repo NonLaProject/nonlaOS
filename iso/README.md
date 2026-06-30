@@ -69,3 +69,6 @@ ISO hybrid vẫn cần lệnh `isohybrid` ở bước binary cuối, nên workfl
 Script đặt `--build-with-chroot false` để bước tạo ISO chạy bằng tool trên host
 runner. Nếu để binary stage chạy trong chroot, một số bản live-build cũ sẽ sinh
 `binary.sh` gọi `isohybrid` nhưng chroot không có binary đó.
+
+Memtest đang tắt bằng `--memtest none`; mục tiêu MVP hiện tại là ISO boot/live
+KDE, chưa cần thêm entry memtest vào boot menu.
