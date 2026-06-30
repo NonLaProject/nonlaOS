@@ -51,6 +51,7 @@ jobs:
                 grub-efi-ia32-bin \
                 grub-pc-bin \
                 isolinux \
+                librsvg2-bin \
                 syslinux \
                 syslinux-common \
                 syslinux-efi \
