@@ -54,15 +54,43 @@
 - [ ] `dist/repo/dists/stable/main/binary-amd64/Packages` tồn tại.
 - [ ] `dist/repo/dists/stable/main/binary-amd64/Packages.gz` tồn tại.
 - [ ] `dist/repo/dists/stable/Release` tồn tại.
+- [ ] `dist/repo/dists/stable/InRelease` tồn tại sau khi chạy
+  `./tools/sign-repo.sh`.
+- [ ] `dist/repo/dists/stable/Release.gpg` tồn tại sau khi chạy
+  `./tools/sign-repo.sh`.
+- [ ] `gpgv --keyring packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg
+  dist/repo/dists/stable/InRelease` verify good.
+- [ ] `gpgv --keyring packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg
+  dist/repo/dists/stable/Release.gpg dist/repo/dists/stable/Release` verify
+  good.
+- [ ] `nonla-repo-keyring` ship đúng
+  `/usr/share/keyrings/nonla-archive-keyring.gpg`.
 - [ ] APT đọc được repo local qua `file://`.
 - [ ] `apt-cache policy nonla-desktop` thấy package từ repo local.
 
 ## CI ISO Checklist
 
-- [ ] Workflow `ISO build` chạy pass trên GitHub Actions.
+- [ ] Workflow `ISO build` chạy pass trên GitHub Actions bằng
+  `workflow_dispatch`.
+- [ ] Secret `NONLA_ARCHIVE_PRIVATE_KEY` đã được set.
 - [ ] Artifact `nonlaos-packages` có đủ package `.deb`.
-- [ ] Artifact `nonlaos-apt-repo` có `Packages.gz` và `Release`.
+- [ ] Artifact `nonlaos-apt-repo` có `Packages.gz`, `Release`, `InRelease` và
+  `Release.gpg`.
 - [ ] Artifact `nonlaos-iso` có `nonlaOS-0.1-alpha-amd64.iso`.
+- [ ] Artifact `nonlaos-iso` có `SHA256SUMS`.
+- [ ] Artifact `nonlaos-iso` có `SHA256SUMS.gpg`.
+- [ ] `file dist/iso/nonlaOS-0.1-alpha-amd64.iso` nhận diện ISO image.
+- [ ] `isoinfo -d -i dist/iso/nonlaOS-0.1-alpha-amd64.iso` thấy El Torito boot
+  catalog.
+- [ ] `xorriso -indev dist/iso/nonlaOS-0.1-alpha-amd64.iso -report_el_torito
+  plain` thấy boot metadata.
+- [ ] `./tools/verify-iso-boot.sh` chạy pass trong CI.
+- [ ] QEMU BIOS smoke test không báo `Boot failed` hoặc `No bootable device`.
+- [ ] `SHA256SUMS.gpg` verify good bằng public key nonlaOS.
+- [ ] `sha256sum -c SHA256SUMS` pass.
+- [ ] SourceForge upload pass nếu có đủ secrets:
+  `SOURCEFORGE_USER`, `SOURCEFORGE_PROJECT`, `SOURCEFORGE_SSH_PRIVATE_KEY`.
+- [ ] Nếu thiếu SourceForge secrets, workflow skip public upload nhưng vẫn pass.
 - [ ] Tải ISO về và boot thử trong VM bằng UEFI.
 - [ ] Live KDE desktop vào được.
 - [ ] Wallpaper/theme nonla được áp dụng.

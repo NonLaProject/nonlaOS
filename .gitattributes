@@ -8,6 +8,8 @@ CODEOWNERS text eol=lf
 *.sh text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
+*.asc text eol=lf
+*.gpg binary
 *.png binary
 *.colors text eol=lf
 *.desktop text eol=lf

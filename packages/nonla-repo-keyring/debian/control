@@ -9,5 +9,6 @@ Rules-Requires-Root: no
 Package: nonla-repo-keyring
 Architecture: all
 Depends: ${misc:Depends}
-Description: nonlaOS APT repository keyring skeleton
- Provides the package foundation for future nonlaOS APT repository signing keys.
+Description: nonlaOS APT repository keyring
+ Provides the public OpenPGP archive key used to verify signed nonlaOS APT
+ repository metadata.

@@ -63,11 +63,47 @@ require_tool python3 python3
 require_tool tee coreutils
 require_tool genisoimage genisoimage
 require_tool isohybrid syslinux-utils
+require_tool xorriso xorriso
+require_tool mcopy mtools
+
+configure_live_build() {
+    local -a base_config=(
+        --mode debian
+        --distribution "${LB_DISTRIBUTION}"
+        --architectures "${LB_ARCH}"
+        --binary-images iso-hybrid
+        --archive-areas main
+        --apt-indices false
+        --apt-recommends true
+        --build-with-chroot false
+        --debian-installer false
+        --initsystem systemd
+        --memtest none
+        --security "${LB_SECURITY}"
+        --iso-application "nonlaOS 0.1 Alpha"
+        --iso-publisher "nonlaOS"
+        --iso-volume "nonlaOS 0.1 Alpha ${LB_ARCH}"
+    )
+
+    if lb config --help 2>&1 | grep -q -- '--bootloaders'; then
+        lb config "${base_config[@]}" --bootloaders syslinux,grub-efi
+    else
+        echo "live-build does not advertise --bootloaders; using BIOS syslinux bootloader." >&2
+        lb config "${base_config[@]}" --bootloader syslinux
+    fi
+}
 
 cd "${ROOT_DIR}"
 
 ./tools/build-packages.sh
 ./tools/make-repo.sh
+
+if [[ -n "${NONLA_ARCHIVE_PRIVATE_KEY_FILE:-}" || -n "${NONLA_ARCHIVE_PRIVATE_KEY:-}" ]]; then
+    ./tools/sign-repo.sh
+else
+    echo "nonlaOS archive private key not provided; live-build will use the unsigned local repository."
+fi
+
 patch_live_build_contents_path
 
 run_as_root rm -rf "${LIVE_WORK_DIR}"
@@ -101,24 +137,7 @@ printf '%s\n' "${REPO_SOURCE}" > "${LIVE_WORK_DIR}/config/archives/nonla-local.l
 
 (
     cd "${LIVE_WORK_DIR}"
-
-    lb config \
-        --mode debian \
-        --distribution "${LB_DISTRIBUTION}" \
-        --architectures "${LB_ARCH}" \
-        --binary-images iso-hybrid \
-        --archive-areas main \
-        --apt-indices false \
-        --apt-recommends true \
-        --bootloader grub-efi \
-        --build-with-chroot false \
-        --debian-installer false \
-        --initsystem systemd \
-        --memtest none \
-        --security "${LB_SECURITY}" \
-        --iso-application "nonlaOS 0.1 Alpha" \
-        --iso-publisher "nonlaOS" \
-        --iso-volume "nonlaOS 0.1 Alpha ${LB_ARCH}"
+    configure_live_build
 
     run_as_root lb build 2>&1 | tee "${LOG_DIR}/live-build.log"
 )

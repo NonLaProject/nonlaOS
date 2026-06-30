@@ -2,14 +2,6 @@ name: ISO build
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "packages/**"
-      - "iso/**"
-      - "tools/**"
-      - ".github/workflows/build-iso.yml"
 
 permissions:
   contents: read
@@ -22,12 +14,84 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Build ISO in Debian trixie
+      - name: Install host dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            gnupg \
+            rsync \
+            openssh-client \
+            devscripts \
+            dpkg-dev \
+            debhelper \
+            lintian \
+            apt-utils \
+            live-build \
+            genisoimage \
+            xorriso \
+            isolinux \
+            syslinux-common \
+            syslinux-utils \
+            squashfs-tools \
+            dctrl-tools \
+            grub-pc-bin \
+            grub-efi-ia32-bin \
+            dosfstools \
+            librsvg2-bin \
+            mtools \
+            qemu-system-x86 \
+            file
+
+      - name: Require nonlaOS archive signing key
+        env:
+          NONLA_ARCHIVE_PRIVATE_KEY: ${{ secrets.NONLA_ARCHIVE_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${NONLA_ARCHIVE_PRIVATE_KEY}" ]; then
+            echo "Missing required secret: NONLA_ARCHIVE_PRIVATE_KEY" >&2
+            exit 1
+          fi
+
+      - name: Write archive private key
+        env:
+          NONLA_ARCHIVE_PRIVATE_KEY: ${{ secrets.NONLA_ARCHIVE_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p dist/keys/private
+          umask 077
+          printf '%s\n' "${NONLA_ARCHIVE_PRIVATE_KEY}" > dist/keys/private/nonla-archive-private-key.asc
+
+      - name: Configure SourceForge SSH key
+        env:
+          SOURCEFORGE_SSH_PRIVATE_KEY: ${{ secrets.SOURCEFORGE_SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SOURCEFORGE_SSH_PRIVATE_KEY}" ]; then
+            echo "SourceForge secrets missing; skipping SSH key setup."
+            exit 0
+          fi
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "${SOURCEFORGE_SSH_PRIVATE_KEY}" > ~/.ssh/id_sourceforge
+          chmod 600 ~/.ssh/id_sourceforge
+          printf '%s\n' \
+            'Host frs.sourceforge.net' \
+            '  IdentityFile ~/.ssh/id_sourceforge' \
+            '  IdentitiesOnly yes' \
+            '  StrictHostKeyChecking accept-new' \
+            > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: Build signed ISO in Debian trixie
+        env:
+          NONLA_ARCHIVE_KEY_PASSPHRASE: ${{ secrets.NONLA_ARCHIVE_KEY_PASSPHRASE }}
         run: |
           docker run --rm --privileged \
             -e DEBIAN_FRONTEND=noninteractive \
             -e HOST_UID="$(id -u)" \
             -e HOST_GID="$(id -g)" \
+            -e NONLA_ARCHIVE_PRIVATE_KEY_FILE=/work/dist/keys/private/nonla-archive-private-key.asc \
+            -e NONLA_ARCHIVE_KEY_PASSPHRASE="${NONLA_ARCHIVE_KEY_PASSPHRASE}" \
             -v "${GITHUB_WORKSPACE}:/work" \
             -w /work \
             debian:trixie \
@@ -36,6 +100,9 @@ jobs:
               apt-get update
               apt-get install -y --no-install-recommends \
                 build-essential \
+                gnupg \
+                rsync \
+                openssh-client \
                 devscripts \
                 dpkg-dev \
                 debhelper \
@@ -56,10 +123,29 @@ jobs:
                 syslinux-common \
                 syslinux-efi \
                 syslinux-utils \
-                squashfs-tools
+                squashfs-tools \
+                mtools \
+                qemu-system-x86 \
+                file
               ./tools/build-iso.sh
+              ./tools/verify-iso-boot.sh
+              ./tools/sign-iso-checksums.sh
               chown -R "${HOST_UID}:${HOST_GID}" dist
             '
+
+      - name: Verify release signatures
+        run: |
+          set -euo pipefail
+          gpgv --keyring packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg \
+            dist/repo/dists/stable/InRelease
+          gpgv --keyring packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg \
+            dist/repo/dists/stable/Release.gpg \
+            dist/repo/dists/stable/Release
+          gpgv --keyring packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg \
+            dist/iso/SHA256SUMS.gpg \
+            dist/iso/SHA256SUMS
+          cd dist/iso
+          sha256sum -c SHA256SUMS
 
       - name: Upload package artifacts
         uses: actions/upload-artifact@v7
@@ -86,6 +172,21 @@ jobs:
         with:
           name: nonlaos-iso
           path: |
-            dist/iso/*.iso
+            dist/iso/nonlaOS-0.1-alpha-amd64.iso
+            dist/iso/SHA256SUMS
+            dist/iso/SHA256SUMS.gpg
             dist/logs/*
           if-no-files-found: error
+
+      - name: Upload ISO to SourceForge
+        env:
+          SOURCEFORGE_USER: ${{ secrets.SOURCEFORGE_USER }}
+          SOURCEFORGE_PROJECT: ${{ secrets.SOURCEFORGE_PROJECT }}
+          SOURCEFORGE_RELEASE_PATH: ${{ secrets.SOURCEFORGE_RELEASE_PATH }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SOURCEFORGE_USER}" ] || [ -z "${SOURCEFORGE_PROJECT}" ] || [ ! -f ~/.ssh/id_sourceforge ]; then
+            echo "SourceForge secrets missing; skipping public upload."
+            exit 0
+          fi
+          ./tools/upload-sourceforge.sh

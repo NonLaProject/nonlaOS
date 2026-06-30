@@ -68,7 +68,6 @@ Local test example:
   deb [trusted=yes] file:${REPO_DIR} ${SUITE} ${COMPONENT}
 
 TODO:
-  - Add nonla-repo-keyring with the repository signing key.
-  - Sign the repository and generate InRelease/Release.gpg.
+  - Run ./tools/sign-repo.sh to generate signed InRelease/Release.gpg.
   - Use [trusted=yes] only for local unsigned testing.
 EOF

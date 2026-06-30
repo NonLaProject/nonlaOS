@@ -7,237 +7,263 @@
 [![Package build](https://github.com/NonLaProject/nonlaOS/actions/workflows/package-build.yml/badge.svg)](https://github.com/NonLaProject/nonlaOS/actions/workflows/package-build.yml)
 [![ISO build](https://github.com/NonLaProject/nonlaOS/actions/workflows/build-iso.yml/badge.svg)](https://github.com/NonLaProject/nonlaOS/actions/workflows/build-iso.yml)
 
-nonlaOS là dự án Linux desktop tiếng Việt dựa trên Debian stable, dùng KDE
+nonlaOS là dự án Linux desktop tiếng Việt dựa trên Debian stable/trixie, dùng KDE
 Plasma, hướng tới người chuyển từ Windows sang Linux.
 
-Dự án ưu tiên cách làm có thể kiểm chứng và lặp lại: mọi thay đổi hệ thống được
-đóng gói thành Debian package, phân phối qua APT repo, rồi mới đưa vào ISO. Repo
-này là nền móng packaging/source đầu tiên của nonlaOS, chưa phải bản ISO hoàn
-chỉnh cho người dùng cuối.
+Repo này chứa nền móng packaging, APT repository, live-build ISO và release
+pipeline. Mọi thay đổi hệ thống phải đi qua Debian package, không sửa ISO thủ
+công.
 
-## Mục tiêu
+## Mục tiêu 0.1 alpha
 
-MVP 0.1 tập trung vào một hệ desktop tối thiểu nhưng đúng quy trình:
-
-- Debian stable làm base.
+- Debian stable/trixie làm base.
 - KDE Plasma làm desktop mặc định.
-- Hỗ trợ tiếng Việt, bộ gõ và font phù hợp.
-- Cài sẵn các ứng dụng desktop cơ bản cho người mới chuyển từ Windows.
-- Có nhận diện nonlaOS đầu tiên qua wallpaper, color scheme, SDDM và Plymouth.
-- Có Calamares để chuẩn bị luồng cài đặt.
-- Build package, repo và ISO theo hướng reproducible.
+- Hỗ trợ tiếng Việt, font và bộ gõ phù hợp.
+- Có nhận diện nonlaOS đầu tiên qua logo, wallpaper, KDE color scheme, SDDM và
+  Plymouth.
+- Build package, APT repo và ISO bằng script/CI có thể lặp lại.
+- Release artifact có chữ ký APT repo và checksum ISO.
 
-## Nguyên tắc kỹ thuật
+## Nguyên tắc
 
-- Không đưa phần mềm lậu, crack, keygen hoặc asset không rõ license vào repo.
+- Không phần mềm lậu, crack, keygen hoặc asset không rõ license.
 - Không sửa ISO thủ công.
-- Không coi theme, cấu hình hoặc branding là “file copy tay”; mọi thay đổi phải
-  đi qua Debian package.
-- Tối ưu cho khả năng review, rollback và update bằng APT.
-- Ưu tiên Debian stable và package chính thống trước khi thêm dependency ngoài.
+- Package hóa mọi thay đổi hệ thống.
+- Private key không bao giờ được commit.
+- Không hardcode domain public của nonlaOS trong source.
 
 ## Cấu trúc repo
 
 ```text
-packages/
-  nonla-desktop/             Metapackage cho desktop stack cơ bản
-  nonla-look/                Wallpaper, KDE color scheme, SDDM, Plymouth
-  nonla-branding/            Branding hệ thống sau này
-  nonla-default-settings/    Cấu hình mặc định người dùng sau này
-  nonla-calamares-config/    Cấu hình installer sau này
-  nonla-welcome/             Welcome app sau này
-  nonla-repo-keyring/        Keyring cho APT repo sau này
-docs/                        Roadmap, testing, packaging notes, architecture
-img/                         Asset nội bộ của nonlaOS
-tools/                       Script build package, APT repo và ISO
-iso/                         Cấu hình live-build cho ISO nonlaOS
-artwork/                     Không gian chuẩn bị cho artwork source sau này
+packages/   Debian package source
+iso/        live-build config
+tools/      build, repo, signing, release scripts
+docs/       roadmap, testing, packaging notes
+img/        asset nội bộ của nonlaOS
+artwork/    artwork source sau này
 ```
 
-## Package hiện có
+## Package chính
 
-`nonla-desktop` là metapackage kéo desktop stack KDE Plasma cơ bản cùng các
-package nhận diện/cấu hình của nonlaOS. Nó phụ thuộc vào `nonla-branding`,
-`nonla-look`, `nonla-default-settings`, SDDM, Calamares, Firefox ESR,
-LibreOffice, Dolphin, Konsole, Kate, Okular, Ark, Gwenview, Noto fonts, FCITX5,
-FCITX5 Unikey và UFW. Package `kcm-fcitx5` được khai báo `Recommends` vì tên gói
-có thể khác nhau giữa các nhánh Debian hoặc mirror.
-
-`nonla-branding` ship logo, icon và metadata nhận diện riêng của nonlaOS:
-
-- `/usr/share/nonlaos/branding/nonlaos-release`
-- `/usr/share/nonlaos/branding/boot_logo.png`
-- `/usr/share/nonlaos/branding/launcher_icon.png`
-- `/usr/share/pixmaps/nonlaos.png`
-- `/usr/share/icons/hicolor/256x256/apps/nonlaos.png`
-
-Package này chưa thay thế `/etc/os-release` hoặc `/usr/lib/os-release`; phần đó
-sẽ xử lý riêng trong ISO/live-build hoặc package `base-files` riêng sau này.
-
-`nonla-look` là payload nhận diện đầu tiên của nonlaOS. Package này dùng asset
-nội bộ từ `img/` để ship:
-
-- KDE wallpaper `nonlaOS Default`
-- KDE color scheme `Nonla`
-- Plasma look-and-feel skeleton
-- SDDM theme skeleton
-- Plymouth theme skeleton
-
-Icon app `nonlaos` thuộc package `nonla-branding` để tránh hai package cùng sở
-hữu một đường dẫn icon.
-
-`nonla-default-settings` ship cấu hình mặc định cho user mới:
-
-- seed KDE Plasma config qua `/etc/skel`
-- đặt wallpaper `nonla-default` và color scheme `Nonla`
-- seed panel Plasma cơ bản với launcher icon `nonlaos`
-- bật FCITX5 qua `/etc/environment.d/90-nonla-input.conf`
-- autostart FCITX5 và seed profile ưu tiên Unikey
-
-Package này chỉ áp dụng cho user được tạo sau khi package đã cài. Nó không ghi
-đè home directory hoặc config của user hiện có.
-
-Các package còn lại hiện là skeleton có chủ đích để giữ ownership packaging cho
-các bước tiếp theo.
+- `nonla-desktop`: metapackage kéo KDE desktop stack, app cơ bản và các package
+  nhận diện/cấu hình của nonlaOS.
+- `nonla-branding`: logo, icon và metadata nhận diện riêng của nonlaOS, chưa
+  thay thế `/etc/os-release`.
+- `nonla-look`: wallpaper, KDE color scheme `Nonla`, look-and-feel skeleton,
+  SDDM theme, Plymouth theme.
+- `nonla-default-settings`: seed cấu hình user mới qua `/etc/skel`, bật FCITX5
+  qua `/etc/environment.d`, không ghi đè user hiện có.
+- `nonla-repo-keyring`: public archive key để verify APT repo nonlaOS.
 
 ## Build packages
-
-Trên Debian/WSL, cài dependency build:
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y build-essential devscripts dpkg-dev debhelper lintian
-```
 
-Build toàn bộ package:
-
-```bash
 ./tools/build-packages.sh
 ```
 
-Output nằm trong:
+Output:
 
 ```text
 dist/packages/
 ```
 
-Lint package:
+Lint:
 
 ```bash
 lintian dist/packages/*.deb
 ```
 
-Một số package skeleton có thể còn warning `empty-binary-package`; xem
-[Packaging notes](docs/PACKAGING_NOTES.md) để biết warning nào đang được chấp
-nhận tạm thời.
-
 ## Build APT repository
-
-Cài dependency để tạo APT repository metadata:
 
 ```bash
 sudo apt install dpkg-dev apt-utils gzip
-```
 
-Build package rồi tạo repo:
-
-```bash
 ./tools/build-packages.sh
 ./tools/make-repo.sh
 ```
 
-Output nằm trong:
+Output:
 
 ```text
 dist/repo/
 ```
 
-Test local repo bằng `file://`:
+Test local repo chưa ký bằng `file://`:
 
 ```bash
 REPO_PATH="$(pwd)/dist/repo"
 
-echo "deb [trusted=yes] file:${REPO_PATH} stable main" | sudo tee /etc/apt/sources.list.d/nonla-local.list
+echo "deb [trusted=yes] file:${REPO_PATH} stable main" | \
+  sudo tee /etc/apt/sources.list.d/nonla-local.list
 
 sudo apt update
 apt-cache policy nonla-desktop
 ```
 
-Ví dụ cấu hình public repo khi deploy:
+Ví dụ public repo khi deploy:
 
 ```text
-deb [trusted=yes] https://YOUR_EXISTING_REPO_DOMAIN/path/to/repo stable main
+deb [signed-by=/usr/share/keyrings/nonla-archive-keyring.gpg] https://YOUR_EXISTING_REPO_DOMAIN/path/to/repo stable main
 ```
 
-Domain thật được cấu hình khi deploy lên hạ tầng repo hiện có. Domain riêng cho
-nonlaOS sẽ xử lý sau, và source repo không hardcode URL public.
+Domain thật được cấu hình ở hạ tầng deploy. Domain riêng cho nonlaOS xử lý sau.
 
-Repo hiện chưa ký GPG. Bước sau sẽ xử lý `nonla-repo-keyring` và tạo
-`InRelease`/`Release.gpg`; `[trusted=yes]` chỉ dùng cho local unsigned test.
+## Archive signing key
+
+Archive key hiện tại:
+
+```text
+uid: nonlaOS Archive Signing Key
+fingerprint: 6A41 9F7B EF2D D819 B80F  3ECF 9E06 44E3 BBCF FFC3
+```
+
+Public key được commit trong:
+
+```text
+packages/nonla-repo-keyring/src/nonla-archive-key.asc
+packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg
+```
+
+Private key local nằm trong `dist/keys/private/` và bị `.gitignore` bỏ qua.
+
+Tạo key mới khi rotate:
+
+```bash
+GNUPGHOME="$(mktemp -d)"
+chmod 700 "$GNUPGHOME"
+export GNUPGHOME
+
+gpg --batch --pinentry-mode loopback --passphrase "" \
+  --quick-generate-key "nonlaOS Archive Signing Key" rsa4096 sign 3y
+
+KEY_FPR="$(gpg --batch --with-colons --list-secret-keys \
+  "nonlaOS Archive Signing Key" | awk -F: '/^fpr:/ {print $10; exit}')"
+
+gpg --armor --export "$KEY_FPR" > packages/nonla-repo-keyring/src/nonla-archive-key.asc
+gpg --export "$KEY_FPR" > packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg
+gpg --armor --export-secret-keys "$KEY_FPR" > dist/keys/private/nonla-archive-private-key.asc
+```
+
+Ký repo:
+
+```bash
+./tools/build-packages.sh
+./tools/make-repo.sh
+
+NONLA_ARCHIVE_PRIVATE_KEY_FILE=dist/keys/private/nonla-archive-private-key.asc \
+  ./tools/sign-repo.sh
+```
+
+Verify repo:
+
+```bash
+gpgv --keyring packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg \
+  dist/repo/dists/stable/InRelease
+
+gpgv --keyring packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg \
+  dist/repo/dists/stable/Release.gpg \
+  dist/repo/dists/stable/Release
+```
+
+## GitHub Actions release secrets
+
+Set GPG private key:
+
+```bash
+gh secret set NONLA_ARCHIVE_PRIVATE_KEY < dist/keys/private/nonla-archive-private-key.asc
+```
+
+Nếu key có passphrase:
+
+```bash
+gh secret set NONLA_ARCHIVE_KEY_PASSPHRASE
+```
+
+Set SourceForge secrets:
+
+```bash
+gh secret set SOURCEFORGE_USER
+gh secret set SOURCEFORGE_PROJECT
+gh secret set SOURCEFORGE_SSH_PRIVATE_KEY < path/to/sourceforge_deploy_key
+```
+
+Custom release path nếu cần:
+
+```bash
+gh secret set SOURCEFORGE_RELEASE_PATH
+```
+
+Mặc định:
+
+```text
+/home/frs/project/${SOURCEFORGE_PROJECT}/
+```
+
+SourceForge FRS dùng restricted shell, nên script không tự tạo thư mục release
+bằng SSH. Nếu muốn upload vào subfolder như `nonlaOS/0.1-alpha/`, hãy tạo folder
+đó trước trong SourceForge UI rồi set `SOURCEFORGE_RELEASE_PATH`.
 
 ## Build ISO
 
-ISO nonlaOS được build bằng GitHub Actions. Máy local không bắt buộc phải build
-ISO vì live-build cần nhiều dung lượng, thời gian và quyền hệ thống hơn bước
-packaging thông thường.
-
-Workflow chính:
+ISO chính thức build bằng GitHub Actions workflow:
 
 ```text
 .github/workflows/build-iso.yml
 ```
 
-Workflow chạy trên `ubuntu-latest`, nhưng bước build ISO chạy trong container
-`debian:trixie` có quyền `--privileged` để live-build khớp Debian stable/trixie
-thay vì dùng bản live-build của Ubuntu runner. Bên trong container, workflow cài
-dependency build rồi chạy:
-
-```bash
-./tools/build-iso.sh
-```
-
-Script sẽ tự build package, tạo APT repo local từ `dist/repo/`, cấu hình
-live-build trong `dist/live-build/`, rồi xuất ISO:
-
-```text
-dist/iso/nonlaOS-0.1-alpha-amd64.iso
-```
-
-Chạy workflow thủ công trên GitHub:
+Workflow chỉ chạy thủ công qua `workflow_dispatch`:
 
 1. Vào tab **Actions**.
-2. Chọn workflow **ISO build**.
+2. Chọn **ISO build**.
 3. Chọn **Run workflow** trên branch `main`.
-4. Khi run hoàn tất, tải artifact `nonlaos-iso`.
+4. Tải artifact `nonlaos-iso` sau khi run xong.
 
-Các artifact liên quan:
+Artifact ISO gồm:
 
-- `nonlaos-packages`: các file `.deb`, `.changes`, `.buildinfo`.
-- `nonlaos-apt-repo`: repo APT local đã tạo từ package.
-- `nonlaos-iso`: ISO và log live-build.
+```text
+nonlaOS-0.1-alpha-amd64.iso
+SHA256SUMS
+SHA256SUMS.gpg
+```
 
-Local vẫn có thể chạy `./tools/build-iso.sh` nếu môi trường đủ mạnh và đã cài
-`live-build`, `genisoimage`, `xorriso` và bộ `syslinux` có `isohybrid`, nhưng
-CI là môi trường build ISO chính thức của dự án.
+Workflow kiểm tra boot metadata và BIOS boot smoke test trước khi upload:
 
-## Trạng thái CI
+```bash
+file dist/iso/nonlaOS-0.1-alpha-amd64.iso
+isoinfo -d -i dist/iso/nonlaOS-0.1-alpha-amd64.iso
+xorriso -indev dist/iso/nonlaOS-0.1-alpha-amd64.iso -report_el_torito plain
+./tools/verify-iso-boot.sh
+```
 
-GitHub Actions hiện build toàn bộ Debian package và chạy lintian trên mỗi push
-vào `main` và mỗi pull request. Workflow `ISO build` chạy khi push vào `main`
-có thay đổi trong `packages/**`, `iso/**`, `tools/**` hoặc chính workflow ISO;
-nó cũng hỗ trợ chạy thủ công bằng `workflow_dispatch`. Branch `main` được bảo vệ
-bằng ruleset: thay đổi phải đi qua pull request, CI `build` phải pass và cần
-review trước khi merge.
+`tools/build-iso.sh` ưu tiên tạo ISO hybrid có BIOS + UEFI bootloader bằng
+`syslinux,grub-efi`. Nếu live-build trên runner không hỗ trợ nhiều bootloader,
+script fallback về BIOS `syslinux` để VirtualBox/QEMU vẫn boot được.
 
-## Roadmap
+Nếu SourceForge secrets có đủ, workflow upload các file trên lên SourceForge.
+Nếu thiếu SourceForge secrets, workflow vẫn build và upload GitHub Actions
+artifacts, chỉ bỏ qua public upload.
 
-- `0.1 alpha`: Debian + KDE + nonla look + tiếng Việt + Calamares + ISO
-  boot/install.
-- `0.5 beta`: APT repo + welcome app + docs + update hoạt động + test máy thật.
-- `1.0 stable`: dùng hằng ngày ổn, license sạch, update không vỡ.
-- `2.0`: Edu/Gov mode, policy, restore, bulk deploy, hardening.
+Tải từ SourceForge sau khi upload:
 
-Xem chi tiết tại [docs/ROADMAP.md](docs/ROADMAP.md).
+```text
+https://sourceforge.net/projects/YOUR_SOURCEFORGE_PROJECT/files/
+```
+
+Verify checksum ISO:
+
+```bash
+gpgv --keyring packages/nonla-repo-keyring/src/nonla-archive-keyring.gpg \
+  SHA256SUMS.gpg \
+  SHA256SUMS
+
+sha256sum -c SHA256SUMS
+```
+
+Local vẫn có thể chạy `./tools/build-iso.sh` nếu môi trường đủ mạnh và có
+`live-build`, nhưng CI là môi trường build ISO chính thức.
 
 ## Tài liệu
 
