@@ -5,6 +5,7 @@
 # nonlaOS
 
 [![Package build](https://github.com/NonLaProject/nonlaOS/actions/workflows/package-build.yml/badge.svg)](https://github.com/NonLaProject/nonlaOS/actions/workflows/package-build.yml)
+[![ISO build](https://github.com/NonLaProject/nonlaOS/actions/workflows/build-iso.yml/badge.svg)](https://github.com/NonLaProject/nonlaOS/actions/workflows/build-iso.yml)
 
 nonlaOS là dự án Linux desktop tiếng Việt dựa trên Debian stable, dùng KDE
 Plasma, hướng tới người chuyển từ Windows sang Linux.
@@ -48,8 +49,8 @@ packages/
   nonla-repo-keyring/        Keyring cho APT repo sau này
 docs/                        Roadmap, testing, packaging notes, architecture
 img/                         Asset nội bộ của nonlaOS
-tools/                       Script build package
-iso/                         Không gian chuẩn bị cho ISO tooling sau này
+tools/                       Script build package, APT repo và ISO
+iso/                         Cấu hình live-build cho ISO nonlaOS
 artwork/                     Không gian chuẩn bị cho artwork source sau này
 ```
 
@@ -172,11 +173,55 @@ nonlaOS sẽ xử lý sau, và source repo không hardcode URL public.
 Repo hiện chưa ký GPG. Bước sau sẽ xử lý `nonla-repo-keyring` và tạo
 `InRelease`/`Release.gpg`; `[trusted=yes]` chỉ dùng cho local unsigned test.
 
+## Build ISO
+
+ISO nonlaOS được build bằng GitHub Actions. Máy local không bắt buộc phải build
+ISO vì live-build cần nhiều dung lượng, thời gian và quyền hệ thống hơn bước
+packaging thông thường.
+
+Workflow chính:
+
+```text
+.github/workflows/build-iso.yml
+```
+
+Workflow này cài dependency build, chạy:
+
+```bash
+./tools/build-iso.sh
+```
+
+Script sẽ tự build package, tạo APT repo local từ `dist/repo/`, cấu hình
+live-build trong `dist/live-build/`, rồi xuất ISO:
+
+```text
+dist/iso/nonlaOS-0.1-alpha-amd64.iso
+```
+
+Chạy workflow thủ công trên GitHub:
+
+1. Vào tab **Actions**.
+2. Chọn workflow **ISO build**.
+3. Chọn **Run workflow** trên branch `main`.
+4. Khi run hoàn tất, tải artifact `nonlaos-iso`.
+
+Các artifact liên quan:
+
+- `nonlaos-packages`: các file `.deb`, `.changes`, `.buildinfo`.
+- `nonlaos-apt-repo`: repo APT local đã tạo từ package.
+- `nonlaos-iso`: ISO và log live-build.
+
+Local vẫn có thể chạy `./tools/build-iso.sh` nếu môi trường đủ mạnh và đã cài
+`live-build`, nhưng CI là môi trường build ISO chính thức của dự án.
+
 ## Trạng thái CI
 
 GitHub Actions hiện build toàn bộ Debian package và chạy lintian trên mỗi push
-vào `main` và mỗi pull request. Branch `main` được bảo vệ bằng ruleset: thay đổi
-phải đi qua pull request, CI `build` phải pass và cần review trước khi merge.
+vào `main` và mỗi pull request. Workflow `ISO build` chạy khi push vào `main`
+có thay đổi trong `packages/**`, `iso/**`, `tools/**` hoặc chính workflow ISO;
+nó cũng hỗ trợ chạy thủ công bằng `workflow_dispatch`. Branch `main` được bảo vệ
+bằng ruleset: thay đổi phải đi qua pull request, CI `build` phải pass và cần
+review trước khi merge.
 
 ## Roadmap
 

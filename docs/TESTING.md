@@ -56,3 +56,16 @@
 - [ ] `dist/repo/dists/stable/Release` tồn tại.
 - [ ] APT đọc được repo local qua `file://`.
 - [ ] `apt-cache policy nonla-desktop` thấy package từ repo local.
+
+## CI ISO Checklist
+
+- [ ] Workflow `ISO build` chạy pass trên GitHub Actions.
+- [ ] Artifact `nonlaos-packages` có đủ package `.deb`.
+- [ ] Artifact `nonlaos-apt-repo` có `Packages.gz` và `Release`.
+- [ ] Artifact `nonlaos-iso` có `nonlaOS-0.1-alpha-amd64.iso`.
+- [ ] Tải ISO về và boot thử trong VM bằng UEFI.
+- [ ] Live KDE desktop vào được.
+- [ ] Wallpaper/theme nonla được áp dụng.
+- [ ] `apt-cache policy nonla-desktop`.
+- [ ] `systemctl --failed`.
+- [ ] `journalctl -p 3 -b`.
