@@ -128,6 +128,50 @@ Một số package skeleton có thể còn warning `empty-binary-package`; xem
 [Packaging notes](docs/PACKAGING_NOTES.md) để biết warning nào đang được chấp
 nhận tạm thời.
 
+## Build APT repository
+
+Cài dependency để tạo APT repository metadata:
+
+```bash
+sudo apt install dpkg-dev apt-utils gzip
+```
+
+Build package rồi tạo repo:
+
+```bash
+./tools/build-packages.sh
+./tools/make-repo.sh
+```
+
+Output nằm trong:
+
+```text
+dist/repo/
+```
+
+Test local repo bằng `file://`:
+
+```bash
+REPO_PATH="$(pwd)/dist/repo"
+
+echo "deb [trusted=yes] file:${REPO_PATH} stable main" | sudo tee /etc/apt/sources.list.d/nonla-local.list
+
+sudo apt update
+apt-cache policy nonla-desktop
+```
+
+Ví dụ cấu hình public repo khi deploy:
+
+```text
+deb [trusted=yes] https://YOUR_EXISTING_REPO_DOMAIN/path/to/repo stable main
+```
+
+Domain thật được cấu hình khi deploy lên hạ tầng repo hiện có. Domain riêng cho
+nonlaOS sẽ xử lý sau, và source repo không hardcode URL public.
+
+Repo hiện chưa ký GPG. Bước sau sẽ xử lý `nonla-repo-keyring` và tạo
+`InRelease`/`Release.gpg`; `[trusted=yes]` chỉ dùng cho local unsigned test.
+
 ## Trạng thái CI
 
 GitHub Actions hiện build toàn bộ Debian package và chạy lintian trên mỗi push
