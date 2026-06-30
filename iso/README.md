@@ -62,3 +62,6 @@ Debian/KDE.
 Workflow cấu hình bootloader `grub-efi` vì mục tiêu kiểm thử đầu tiên là UEFI.
 Điều này cũng tránh lỗi syslinux/isolinux path của live-build trên Ubuntu
 runner.
+
+ISO hybrid vẫn cần lệnh `isohybrid` ở bước binary cuối, nên workflow cài đủ bộ
+`syslinux`/`syslinux-utils` và script kiểm tra dependency này từ đầu.

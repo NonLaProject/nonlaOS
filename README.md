@@ -214,7 +214,8 @@ Các artifact liên quan:
 - `nonlaos-iso`: ISO và log live-build.
 
 Local vẫn có thể chạy `./tools/build-iso.sh` nếu môi trường đủ mạnh và đã cài
-`live-build`, nhưng CI là môi trường build ISO chính thức của dự án.
+`live-build`, `xorriso` và bộ `syslinux` có `isohybrid`, nhưng CI là môi trường
+build ISO chính thức của dự án.
 
 ## Trạng thái CI
 
