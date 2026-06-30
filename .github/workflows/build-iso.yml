@@ -1,0 +1,72 @@
+name: ISO build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/**"
+      - "iso/**"
+      - "tools/**"
+      - ".github/workflows/build-iso.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-iso:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install build dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            build-essential \
+            devscripts \
+            dpkg-dev \
+            debhelper \
+            lintian \
+            apt-utils \
+            live-build \
+            python3 \
+            xorriso \
+            isolinux \
+            syslinux-utils \
+            squashfs-tools
+
+      - name: Build ISO
+        run: ./tools/build-iso.sh
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: nonlaos-packages
+          path: |
+            dist/packages/*.deb
+            dist/packages/*.changes
+            dist/packages/*.buildinfo
+          if-no-files-found: error
+
+      - name: Upload APT repository artifact
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: nonlaos-apt-repo
+          path: dist/repo/
+          if-no-files-found: error
+
+      - name: Upload ISO artifact
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: nonlaos-iso
+          path: |
+            dist/iso/*.iso
+            dist/logs/*
+          if-no-files-found: error
