@@ -63,8 +63,9 @@ Workflow cấu hình bootloader `grub-efi` vì mục tiêu kiểm thử đầu t
 Điều này cũng tránh lỗi syslinux/isolinux path của live-build trên Ubuntu
 runner.
 
-ISO hybrid vẫn cần lệnh `isohybrid` ở bước binary cuối, nên workflow cài đủ bộ
-`syslinux`/`syslinux-utils` và script kiểm tra dependency này từ đầu.
+ISO hybrid vẫn cần `genisoimage`/`isohybrid` ở bước binary cuối trên một số bản
+live-build, nên workflow cài đủ các tool này và script kiểm tra dependency từ
+đầu.
 
 Script đặt `--build-with-chroot false` để bước tạo ISO chạy bằng tool trên host
 runner. Nếu để binary stage chạy trong chroot, một số bản live-build cũ sẽ sinh

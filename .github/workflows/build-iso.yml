@@ -34,6 +34,7 @@ jobs:
             apt-utils \
             live-build \
             python3 \
+            genisoimage \
             xorriso \
             grub-efi-amd64-bin \
             grub-pc-bin \
