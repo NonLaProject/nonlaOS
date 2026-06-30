@@ -110,6 +110,7 @@ printf '%s\n' "${REPO_SOURCE}" > "${LIVE_WORK_DIR}/config/archives/nonla-local.l
         --apt-indices false \
         --apt-recommends true \
         --bootloader grub-efi \
+        --build-with-chroot false \
         --debian-installer false \
         --initsystem systemd \
         --security "${LB_SECURITY}" \
