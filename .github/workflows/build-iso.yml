@@ -39,6 +39,7 @@ jobs:
                 devscripts \
                 dpkg-dev \
                 debhelper \
+                dctrl-tools \
                 lintian \
                 apt-utils \
                 live-build \
