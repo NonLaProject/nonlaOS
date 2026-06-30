@@ -68,6 +68,13 @@ cd "${ROOT_DIR}"
 
 ./tools/build-packages.sh
 ./tools/make-repo.sh
+
+if [[ -n "${NONLA_ARCHIVE_PRIVATE_KEY_FILE:-}" || -n "${NONLA_ARCHIVE_PRIVATE_KEY:-}" ]]; then
+    ./tools/sign-repo.sh
+else
+    echo "nonlaOS archive private key not provided; live-build will use the unsigned local repository."
+fi
+
 patch_live_build_contents_path
 
 run_as_root rm -rf "${LIVE_WORK_DIR}"

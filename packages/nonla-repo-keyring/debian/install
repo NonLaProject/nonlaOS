@@ -1,0 +1,3 @@
+src/nonla-archive-keyring.gpg usr/share/keyrings/
+src/nonla-archive-key.asc usr/share/doc/nonla-repo-keyring/
+README.md usr/share/doc/nonla-repo-keyring/

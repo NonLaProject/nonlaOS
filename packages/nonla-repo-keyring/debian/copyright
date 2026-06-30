@@ -6,6 +6,13 @@ Files: *
 Copyright: 2026 nonlaOS contributors
 License: GPL-3+
 
+Files: src/nonla-archive-key.asc src/nonla-archive-keyring.gpg
+Copyright: 2026 nonlaOS contributors
+License: GPL-3+
+Comment:
+ This is the public nonlaOS archive signing key. The private key is not part of
+ this source package.
+
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify it under
  the terms of the GNU General Public License as published by the Free Software
