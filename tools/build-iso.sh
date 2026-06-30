@@ -109,6 +109,7 @@ printf '%s\n' "${REPO_SOURCE}" > "${LIVE_WORK_DIR}/config/archives/nonla-local.l
         --apt-indices false \
         --apt-recommends true \
         --debian-installer false \
+        --initsystem systemd \
         --security "${LB_SECURITY}" \
         --iso-application "nonlaOS 0.1 Alpha" \
         --iso-publisher "nonlaOS" \
