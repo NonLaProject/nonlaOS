@@ -41,7 +41,7 @@ MVP 0.1 tập trung vào một hệ desktop tối thiểu nhưng đúng quy trì
 ```text
 packages/
   nonla-desktop/             Metapackage cho desktop stack cơ bản
-  nonla-look/                Wallpaper, KDE color scheme, SDDM, Plymouth, icon
+  nonla-look/                Wallpaper, KDE color scheme, SDDM, Plymouth
   nonla-branding/            Branding hệ thống sau này
   nonla-default-settings/    Cấu hình mặc định người dùng sau này
   nonla-calamares-config/    Cấu hình installer sau này
@@ -82,7 +82,9 @@ nội bộ từ `img/` để ship:
 - Plasma look-and-feel skeleton
 - SDDM theme skeleton
 - Plymouth theme skeleton
-- icon app `nonlaos`
+
+Icon app `nonlaos` thuộc package `nonla-branding` để tránh hai package cùng sở
+hữu một đường dẫn icon.
 
 `nonla-default-settings` ship cấu hình mặc định cho user mới:
 

@@ -11,4 +11,4 @@ Architecture: all
 Depends: ${misc:Depends}
 Description: nonlaOS visual look skeleton
  Provides the initial nonlaOS visual identity assets, including a KDE
- wallpaper package, color scheme, SDDM theme, Plymouth theme, and app icon.
+ wallpaper package, color scheme, SDDM theme, and Plymouth theme.
