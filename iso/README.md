@@ -58,3 +58,7 @@ tại `dists/trixie/main/Contents-amd64.gz`.
 Live image dùng `--initsystem systemd` để tránh live-build kéo
 `live-config-sysvinit`, vì gói đó xung đột với desktop systemd mặc định của
 Debian/KDE.
+
+Workflow cấu hình bootloader `grub-efi` vì mục tiêu kiểm thử đầu tiên là UEFI.
+Điều này cũng tránh lỗi syslinux/isolinux path của live-build trên Ubuntu
+runner.

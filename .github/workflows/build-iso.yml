@@ -35,6 +35,8 @@ jobs:
             live-build \
             python3 \
             xorriso \
+            grub-efi-amd64-bin \
+            grub-pc-bin \
             isolinux \
             syslinux-utils \
             squashfs-tools
