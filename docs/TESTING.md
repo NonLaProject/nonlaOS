@@ -79,6 +79,13 @@
 - [ ] Artifact `nonlaos-iso` có `nonlaOS-0.1-alpha-amd64.iso`.
 - [ ] Artifact `nonlaos-iso` có `SHA256SUMS`.
 - [ ] Artifact `nonlaos-iso` có `SHA256SUMS.gpg`.
+- [ ] `file dist/iso/nonlaOS-0.1-alpha-amd64.iso` nhận diện ISO image.
+- [ ] `isoinfo -d -i dist/iso/nonlaOS-0.1-alpha-amd64.iso` thấy El Torito boot
+  catalog.
+- [ ] `xorriso -indev dist/iso/nonlaOS-0.1-alpha-amd64.iso -report_el_torito
+  plain` thấy boot metadata.
+- [ ] `./tools/verify-iso-boot.sh` chạy pass trong CI.
+- [ ] QEMU BIOS smoke test không báo `Boot failed` hoặc `No bootable device`.
 - [ ] `SHA256SUMS.gpg` verify good bằng public key nonlaOS.
 - [ ] `sha256sum -c SHA256SUMS` pass.
 - [ ] SourceForge upload pass nếu có đủ secrets:

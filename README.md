@@ -225,6 +225,19 @@ SHA256SUMS
 SHA256SUMS.gpg
 ```
 
+Workflow kiểm tra boot metadata và BIOS boot smoke test trước khi upload:
+
+```bash
+file dist/iso/nonlaOS-0.1-alpha-amd64.iso
+isoinfo -d -i dist/iso/nonlaOS-0.1-alpha-amd64.iso
+xorriso -indev dist/iso/nonlaOS-0.1-alpha-amd64.iso -report_el_torito plain
+./tools/verify-iso-boot.sh
+```
+
+`tools/build-iso.sh` ưu tiên tạo ISO hybrid có BIOS + UEFI bootloader bằng
+`syslinux,grub-efi`. Nếu live-build trên runner không hỗ trợ nhiều bootloader,
+script fallback về BIOS `syslinux` để VirtualBox/QEMU vẫn boot được.
+
 Nếu SourceForge secrets có đủ, workflow upload các file trên lên SourceForge.
 Nếu thiếu SourceForge secrets, workflow vẫn build và upload GitHub Actions
 artifacts, chỉ bỏ qua public upload.

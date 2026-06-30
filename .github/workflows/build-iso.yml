@@ -27,14 +27,20 @@ jobs:
             lintian \
             apt-utils \
             live-build \
+            genisoimage \
             xorriso \
             isolinux \
+            syslinux-common \
             syslinux-utils \
             squashfs-tools \
             dctrl-tools \
+            grub-pc-bin \
             grub-efi-ia32-bin \
             dosfstools \
-            librsvg2-bin
+            librsvg2-bin \
+            mtools \
+            qemu-system-x86 \
+            file
 
       - name: Require nonlaOS archive signing key
         env:
@@ -117,8 +123,12 @@ jobs:
                 syslinux-common \
                 syslinux-efi \
                 syslinux-utils \
-                squashfs-tools
+                squashfs-tools \
+                mtools \
+                qemu-system-x86 \
+                file
               ./tools/build-iso.sh
+              ./tools/verify-iso-boot.sh
               ./tools/sign-iso-checksums.sh
               chown -R "${HOST_UID}:${HOST_GID}" dist
             '
