@@ -46,3 +46,13 @@
 - [ ] Kiểm tra `/usr/share/icons/hicolor/256x256/apps/nonlaos.png`.
 - [ ] Dry-run cài `nonla-desktop` và xác nhận kéo `nonla-branding`,
   `nonla-look`, `nonla-default-settings`.
+
+## APT Repository Checklist
+
+- [ ] `./tools/build-packages.sh` chạy pass.
+- [ ] `./tools/make-repo.sh` chạy pass.
+- [ ] `dist/repo/dists/stable/main/binary-amd64/Packages` tồn tại.
+- [ ] `dist/repo/dists/stable/main/binary-amd64/Packages.gz` tồn tại.
+- [ ] `dist/repo/dists/stable/Release` tồn tại.
+- [ ] APT đọc được repo local qua `file://`.
+- [ ] `apt-cache policy nonla-desktop` thấy package từ repo local.
