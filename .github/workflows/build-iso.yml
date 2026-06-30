@@ -40,6 +40,7 @@ jobs:
                 dpkg-dev \
                 debhelper \
                 dctrl-tools \
+                dosfstools \
                 lintian \
                 apt-utils \
                 live-build \
