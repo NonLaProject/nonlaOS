@@ -11,8 +11,9 @@ Mục tiêu hiện tại:
 - Cài package nonlaOS từ APT repo local được tạo bởi `tools/make-repo.sh`.
 
 Build ISO chính thức chạy trên GitHub Actions vì bước này cần nhiều tài nguyên
-hơn máy local thông thường. Local chỉ cần build package và APT repo khi phát
-triển packaging.
+hơn máy local thông thường. Workflow dùng runner `ubuntu-latest` nhưng thực thi
+live-build trong container `debian:trixie` privileged để khớp base distro mục
+tiêu. Local chỉ cần build package và APT repo khi phát triển packaging.
 
 Chạy thủ công nếu môi trường đủ mạnh và đã cài `live-build`:
 

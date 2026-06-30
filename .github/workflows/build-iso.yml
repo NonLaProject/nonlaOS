@@ -22,31 +22,40 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Install build dependencies
+      - name: Build ISO in Debian trixie
         run: |
-          sudo apt update
-          sudo apt install -y \
-            build-essential \
-            devscripts \
-            dpkg-dev \
-            debhelper \
-            lintian \
-            apt-utils \
-            live-build \
-            python3 \
-            genisoimage \
-            xorriso \
-            grub-efi-amd64-bin \
-            grub-pc-bin \
-            isolinux \
-            syslinux \
-            syslinux-common \
-            syslinux-efi \
-            syslinux-utils \
-            squashfs-tools
-
-      - name: Build ISO
-        run: ./tools/build-iso.sh
+          docker run --rm --privileged \
+            -e DEBIAN_FRONTEND=noninteractive \
+            -e HOST_UID="$(id -u)" \
+            -e HOST_GID="$(id -g)" \
+            -v "${GITHUB_WORKSPACE}:/work" \
+            -w /work \
+            debian:trixie \
+            bash -lc '
+              set -euo pipefail
+              apt-get update
+              apt-get install -y --no-install-recommends \
+                build-essential \
+                devscripts \
+                dpkg-dev \
+                debhelper \
+                lintian \
+                apt-utils \
+                live-build \
+                python3 \
+                genisoimage \
+                xorriso \
+                grub-efi-amd64-bin \
+                grub-pc-bin \
+                isolinux \
+                syslinux \
+                syslinux-common \
+                syslinux-efi \
+                syslinux-utils \
+                squashfs-tools
+              ./tools/build-iso.sh
+              chown -R "${HOST_UID}:${HOST_GID}" dist
+            '
 
       - name: Upload package artifacts
         uses: actions/upload-artifact@v7
