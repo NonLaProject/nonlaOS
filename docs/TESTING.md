@@ -58,8 +58,10 @@
 - [ ] Cài `nonla-calamares-config`.
 - [ ] `/etc/calamares/settings.conf` tồn tại.
 - [ ] `/etc/calamares/branding/nonla/branding.desc` tồn tại.
+- [ ] `/etc/calamares/branding/nonla/show.qml` tồn tại.
 - [ ] `/usr/share/applications/install-nonlaos.desktop` tồn tại.
 - [ ] `/etc/skel/Desktop/install-nonlaos.desktop` tồn tại và executable.
+- [ ] `branding.desc` có key `slideshow: show.qml`.
 - [ ] `calamares` mở với branding nonlaOS.
 - [ ] `install-nonlaos` mở Calamares qua `pkexec`.
 

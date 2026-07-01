@@ -7,7 +7,7 @@ logo_sprite = Sprite(logo_image);
 name_image = Image.Text("nonlaOS", 0.94, 0.91, 0.78);
 name_sprite = Sprite(name_image);
 
-tagline_image = Image.Text("Debian + KDE Plasma", 0.56, 0.67, 0.45);
+tagline_image = Image.Text("Made by NonLaProject", 0.56, 0.67, 0.45);
 tagline_sprite = Sprite(tagline_image);
 
 sweep_soft_image = Image.Text("////////////////////", 0.55, 0.68, 0.42);
