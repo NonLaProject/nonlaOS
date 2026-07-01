@@ -1,0 +1,35 @@
+---
+componentName: nonla
+welcomeStyleCalamares: true
+welcomeExpandingLogo: true
+windowExpanding: normal
+windowSize: 800px,580px
+windowPlacement: center
+
+strings:
+    productName: nonlaOS
+    shortProductName: nonlaOS
+    version: 0.1 Alpha
+    shortVersion: 0.1
+    versionedName: nonlaOS 0.1 Alpha
+    shortVersionedName: nonlaOS 0.1
+    bootloaderEntryName: nonlaOS
+    productUrl: https://github.com/NonLaProject/nonlaOS
+    supportUrl: https://github.com/NonLaProject/nonlaOS/issues
+    knownIssuesUrl: https://github.com/NonLaProject/nonlaOS/issues
+    releaseNotesUrl: https://github.com/NonLaProject/nonlaOS/releases
+    donateUrl: https://github.com/NonLaProject/nonlaOS
+
+sidebar: widget
+navigation: widget
+
+images:
+    productLogo: boot_logo.png
+    productIcon: boot_logo.png
+    productWelcome: wallpaper.png
+
+style:
+    SidebarBackground: "#173623"
+    SidebarText: "#f6f0d2"
+    SidebarTextCurrent: "#ffffff"
+    SidebarBackgroundCurrent: "#4f7d38"

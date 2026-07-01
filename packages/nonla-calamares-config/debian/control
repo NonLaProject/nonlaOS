@@ -9,6 +9,6 @@ Rules-Requires-Root: no
 Package: nonla-calamares-config
 Architecture: all
 Depends: ${misc:Depends}, calamares
-Description: nonlaOS Calamares configuration skeleton
- Provides the package foundation for nonlaOS installer configuration and
- branding.
+Description: nonlaOS Calamares installer configuration
+ Provides the initial nonlaOS Calamares installer settings, branding and
+ live-session launcher.

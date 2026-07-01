@@ -6,6 +6,14 @@ Files: *
 Copyright: 2026 nonlaOS contributors
 License: GPL-3+
 
+Files: payload/etc/calamares/branding/nonla/boot_logo.png
+ payload/etc/calamares/branding/nonla/wallpaper.png
+Copyright: 2026 nonlaOS contributors
+License: CC-BY-SA-4.0
+Comment:
+ These are internal nonlaOS artwork assets copied from the repository img/
+ directory for Calamares branding.
+
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify it under
  the terms of the GNU General Public License as published by the Free Software
@@ -18,3 +26,12 @@ License: GPL-3+
  .
  On Debian systems, the complete text of the GNU General Public License
  version 3 can be found in "/usr/share/common-licenses/GPL-3".
+
+License: CC-BY-SA-4.0
+ This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+ International License.
+ .
+ On Debian systems, the complete text of the Creative Commons
+ Attribution-ShareAlike 4.0 International License can be found in
+ "/usr/share/common-licenses/CC-BY-SA-4.0" when the creativecommons package is
+ installed.
