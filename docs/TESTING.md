@@ -1,7 +1,17 @@
 # Testing Checklist
 
+## Live ISO
+
 - [ ] Boot UEFI.
+- [ ] Boot BIOS/legacy nếu VM hỗ trợ.
+- [ ] GRUB menu hiển thị nonlaOS hoặc không còn Debian mặc định.
+- [ ] Plymouth/boot splash dùng nonla nếu khả dụng.
 - [ ] Live desktop vào được.
+- [ ] KDE live session dùng wallpaper nonla.
+- [ ] KDE live session dùng color scheme `Nonla` nếu Plasma nhận config.
+- [ ] Desktop có shortcut `Install nonlaOS`.
+- [ ] Menu app có `Install nonlaOS`.
+- [ ] Calamares mở được.
 - [ ] Installer mở được.
 - [ ] Cài vào VM thành công.
 - [ ] Reboot vào hệ đã cài.
@@ -36,6 +46,15 @@
 - [ ] Gõ tiếng Việt được bằng FCITX5 Unikey.
 - [ ] User đã tồn tại trước đó không bị ghi đè cấu hình.
 
+## Calamares Checklist
+
+- [ ] Cài `nonla-calamares-config`.
+- [ ] `/etc/calamares/settings.conf` tồn tại.
+- [ ] `/etc/calamares/branding/nonla/branding.desc` tồn tại.
+- [ ] `/usr/share/applications/install-nonlaos.desktop` tồn tại.
+- [ ] `/etc/skel/Desktop/install-nonlaos.desktop` tồn tại và executable.
+- [ ] `calamares` mở với branding nonlaOS.
+
 ## Branding Checklist
 
 - [ ] Cài `nonla-branding`.
@@ -45,7 +64,7 @@
 - [ ] Kiểm tra `/usr/share/pixmaps/nonlaos.png`.
 - [ ] Kiểm tra `/usr/share/icons/hicolor/256x256/apps/nonlaos.png`.
 - [ ] Dry-run cài `nonla-desktop` và xác nhận kéo `nonla-branding`,
-  `nonla-look`, `nonla-default-settings`.
+  `nonla-look`, `nonla-default-settings`, `nonla-calamares-config`.
 
 ## APT Repository Checklist
 
@@ -94,6 +113,9 @@
 - [ ] Tải ISO về và boot thử trong VM bằng UEFI.
 - [ ] Live KDE desktop vào được.
 - [ ] Wallpaper/theme nonla được áp dụng.
+- [ ] Desktop có shortcut `Install nonlaOS`.
+- [ ] Menu app có `Install nonlaOS`.
+- [ ] Calamares mở được.
 - [ ] `apt-cache policy nonla-desktop`.
 - [ ] `systemctl --failed`.
 - [ ] `journalctl -p 3 -b`.

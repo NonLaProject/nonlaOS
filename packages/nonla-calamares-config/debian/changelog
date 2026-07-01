@@ -1,5 +1,5 @@
 nonla-calamares-config (0.1.0) unstable; urgency=medium
 
-  * Initial Calamares configuration package skeleton.
+  * Add initial Calamares settings, branding and live installer launchers.
 
  -- Le Hung Quang Minh <nonlaproject@users.noreply.github.com>  Mon, 29 Jun 2026 00:00:00 +0700

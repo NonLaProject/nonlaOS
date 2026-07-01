@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Install nonlaOS
+Comment=Install nonlaOS to this computer
+Exec=calamares
+Icon=nonlaos
+Terminal=false
+Categories=System;

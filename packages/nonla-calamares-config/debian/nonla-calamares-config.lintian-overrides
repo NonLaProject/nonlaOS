@@ -1,0 +1,12 @@
+# nonlaOS intentionally seeds the live/new-user desktop with an installer
+# launcher through /etc/skel. This is scoped to the installer package and is
+# required for the live session.
+nonla-calamares-config: package-contains-file-in-etc-skel [etc/skel/Desktop/]
+nonla-calamares-config: package-contains-file-in-etc-skel [etc/skel/Desktop/install-nonlaos.desktop]
+
+# Desktop shortcuts on the desktop need the executable bit so KDE treats them
+# as launchable/trusted files.
+nonla-calamares-config: executable-not-elf-or-script [etc/skel/Desktop/install-nonlaos.desktop]
+
+# calamares is provided by the package dependency, not by this config package.
+nonla-calamares-config: desktop-command-not-in-package calamares [usr/share/applications/install-nonlaos.desktop]

@@ -53,6 +53,8 @@ artwork/    artwork source sau này
   SDDM theme, Plymouth theme.
 - `nonla-default-settings`: seed cấu hình user mới qua `/etc/skel`, bật FCITX5
   qua `/etc/environment.d`, không ghi đè user hiện có.
+- `nonla-calamares-config`: cấu hình Calamares ban đầu, branding installer
+  nonlaOS và launcher `Install nonlaOS` cho live session.
 - `nonla-repo-keyring`: public archive key để verify APT repo nonlaOS.
 
 ## Build packages
@@ -241,6 +243,14 @@ xorriso -indev dist/iso/nonlaOS-0.1-alpha-amd64.iso -report_el_torito plain
 `tools/build-iso.sh` ưu tiên tạo ISO hybrid có BIOS + UEFI bootloader bằng
 `syslinux,grub-efi`. Nếu live-build trên runner không hỗ trợ nhiều bootloader,
 script fallback về BIOS `syslinux` để VirtualBox/QEMU vẫn boot được.
+
+Live ISO branding được apply bằng live-build hooks trong `iso/config/hooks/`:
+
+- seed config KDE từ `/etc/skel` sang live user nếu home đã tồn tại trong
+  chroot
+- đặt Plymouth theme `nonla` nếu Plymouth khả dụng
+- đổi GRUB/live boot menu sang nonlaOS best-effort
+- giữ launcher `Install nonlaOS` trên desktop và trong menu app
 
 Nếu SourceForge secrets có đủ, workflow upload các file trên lên SourceForge.
 Nếu thiếu SourceForge secrets, workflow vẫn build và upload GitHub Actions

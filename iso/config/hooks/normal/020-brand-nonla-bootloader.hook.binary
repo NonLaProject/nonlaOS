@@ -1,0 +1,54 @@
+#!/bin/sh
+set -eu
+
+brand_grub_cfg() {
+    cfg="$1"
+    [ -f "$cfg" ] || return 0
+
+    if [ -f binary/boot/grub/nonla-background.png ] &&
+       ! grep -q 'nonla-background.png' "$cfg"; then
+        tmp="${cfg}.nonla"
+        {
+            echo 'if background_image /boot/grub/nonla-background.png; then'
+            echo '  set color_normal=white/black'
+            echo '  set color_highlight=black/light-green'
+            echo 'fi'
+            cat "$cfg"
+        } > "$tmp"
+        mv "$tmp" "$cfg"
+    fi
+
+    sed -i \
+        -e 's/Debian GNU\/Linux Live/nonlaOS Live/g' \
+        -e 's/Debian GNU\/Linux/nonlaOS/g' \
+        -e 's/Debian Live/nonlaOS Live/g' \
+        -e 's/Debian/nonlaOS/g' \
+        "$cfg"
+}
+
+brand_isolinux_cfg() {
+    cfg="$1"
+    [ -f "$cfg" ] || return 0
+
+    sed -i \
+        -e 's/Debian GNU\/Linux Live/nonlaOS Live/g' \
+        -e 's/Debian GNU\/Linux/nonlaOS/g' \
+        -e 's/Debian Live/nonlaOS Live/g' \
+        -e 's/Debian/nonlaOS/g' \
+        -e 's/menu title .*/menu title nonlaOS Live/g' \
+        "$cfg"
+}
+
+if [ -d binary ]; then
+    find binary -path '*/grub.cfg' -type f | while read -r cfg; do
+        brand_grub_cfg "$cfg"
+    done
+
+    find binary -path '*/isolinux/*.cfg' -type f | while read -r cfg; do
+        brand_isolinux_cfg "$cfg"
+    done
+
+    find binary -path '*/syslinux/*.cfg' -type f | while read -r cfg; do
+        brand_isolinux_cfg "$cfg"
+    done
+fi
