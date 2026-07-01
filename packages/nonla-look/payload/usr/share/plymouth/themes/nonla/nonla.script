@@ -10,19 +10,62 @@ name_sprite = Sprite(name_image);
 tagline_image = Image.Text("Debian + KDE Plasma", 0.56, 0.67, 0.45);
 tagline_sprite = Sprite(tagline_image);
 
+sweep_soft_image = Image.Text("////////////////////", 0.55, 0.68, 0.42);
+sweep_soft_sprite = Sprite(sweep_soft_image);
+sweep_soft_sprite.SetOpacity(0.28);
+
+sweep_mid_image = Image.Text("////////////", 0.86, 0.84, 0.48);
+sweep_mid_sprite = Sprite(sweep_mid_image);
+sweep_mid_sprite.SetOpacity(0.44);
+
+sweep_hot_image = Image.Text("//////", 1.00, 0.96, 0.68);
+sweep_hot_sprite = Sprite(sweep_hot_image);
+sweep_hot_sprite.SetOpacity(0.66);
+
+spark_image = Image.Text("*", 1.00, 0.92, 0.45);
+spark_sprite = Sprite(spark_image);
+
+animation_step = 0;
+sweep_step = 0;
+
 fun refresh_callback()
 {
+    animation_step += 1;
+    sweep_step += 1;
+    if (sweep_step > 150)
+    {
+        sweep_step = 0;
+    }
+
     center_x = Window.GetX() + Window.GetWidth() / 2;
     center_y = Window.GetY() + Window.GetHeight() / 2;
+    logo_x = center_x - logo_image.GetWidth() / 2;
+    logo_y = center_y - logo_image.GetHeight() / 2 - 48;
 
-    logo_sprite.SetX(center_x - logo_image.GetWidth() / 2);
-    logo_sprite.SetY(center_y - logo_image.GetHeight() / 2 - 48);
+    pulse = (Math.Cos(animation_step / 18) + 1) / 2;
+    logo_opacity = 0.88 + pulse * 0.12;
+    tagline_opacity = 0.58 + pulse * 0.22;
 
-    name_sprite.SetX(center_x - name_image.GetWidth() / 2);
-    name_sprite.SetY(center_y + logo_image.GetHeight() / 2 - 16);
+    sweep_progress = sweep_step / 150;
+    sweep_x = logo_x - 120 + sweep_progress * (logo_image.GetWidth() + 240);
+    sweep_y = logo_y + 36 + Math.Cos(animation_step / 14) * 10;
 
-    tagline_sprite.SetX(center_x - tagline_image.GetWidth() / 2);
-    tagline_sprite.SetY(center_y + logo_image.GetHeight() / 2 + 34);
+    logo_sprite.SetPosition(logo_x, logo_y, 3);
+    logo_sprite.SetOpacity(logo_opacity);
+
+    name_sprite.SetPosition(center_x - name_image.GetWidth() / 2, center_y + logo_image.GetHeight() / 2 - 16, 5);
+
+    tagline_sprite.SetPosition(center_x - tagline_image.GetWidth() / 2, center_y + logo_image.GetHeight() / 2 + 34, 5);
+    tagline_sprite.SetOpacity(tagline_opacity);
+
+    sweep_soft_sprite.SetPosition(sweep_x - 60, sweep_y - 12, 4);
+
+    sweep_mid_sprite.SetPosition(sweep_x - 22, sweep_y, 4);
+
+    sweep_hot_sprite.SetPosition(sweep_x + 10, sweep_y + 12, 4);
+
+    spark_sprite.SetPosition(sweep_x + 70, logo_y + 14 + Math.Cos(animation_step / 10) * 18, 6);
+    spark_sprite.SetOpacity(0.30 + pulse * 0.50);
 }
 
 Plymouth.SetRefreshFunction(refresh_callback);

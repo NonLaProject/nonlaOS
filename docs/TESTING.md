@@ -6,6 +6,8 @@
 - [ ] Boot BIOS/legacy nếu VM hỗ trợ.
 - [ ] GRUB menu hiển thị nonlaOS hoặc không còn Debian mặc định.
 - [ ] Plymouth/boot splash dùng nonla nếu khả dụng.
+- [ ] Plymouth có animation nhẹ: logo pulse và vệt sáng lướt, không phải ảnh
+  tĩnh phóng to.
 - [ ] Live desktop vào được.
 - [ ] KDE live session dùng wallpaper nonla.
 - [ ] `/var/lib/live/config/nonla-default-settings` tồn tại trong live session.
