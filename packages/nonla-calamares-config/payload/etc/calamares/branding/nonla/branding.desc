@@ -28,6 +28,9 @@ images:
     productIcon: boot_logo.png
     productWelcome: wallpaper.png
 
+slideshow: show.qml
+slideshowAPI: 2
+
 style:
     SidebarBackground: "#173623"
     SidebarText: "#f6f0d2"
