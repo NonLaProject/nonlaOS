@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+
+if [ "$(id -u)" -eq 0 ]; then
+    exec calamares "$@"
+fi
+
+if command -v pkexec >/dev/null 2>&1; then
+    exec pkexec calamares "$@"
+fi
+
+echo "install-nonlaos: pkexec is required to start Calamares as root." >&2
+exit 1

@@ -1,0 +1,65 @@
+#!/bin/sh
+
+. /usr/lib/live/config.sh
+
+Cmdline ()
+{
+    return 0
+}
+
+Init ()
+{
+    if component_was_executed "nonla-default-settings"
+    then
+        exit 0
+    fi
+
+    echo -n " nonla-default-settings"
+}
+
+copy_skel_to_home ()
+{
+    home_dir="$1"
+    user_name="$(basename "$home_dir")"
+
+    [ -d "$home_dir" ] || return 0
+
+    if [ -d /etc/skel/.config ]; then
+        mkdir -p "$home_dir/.config"
+        cp -a /etc/skel/.config/. "$home_dir/.config/"
+    fi
+
+    if [ -d /etc/skel/.local ]; then
+        mkdir -p "$home_dir/.local"
+        cp -a /etc/skel/.local/. "$home_dir/.local/"
+    fi
+
+    if [ -d /etc/skel/Desktop ]; then
+        mkdir -p "$home_dir/Desktop"
+        cp -a /etc/skel/Desktop/. "$home_dir/Desktop/"
+        chmod 0755 "$home_dir"/Desktop/*.desktop 2>/dev/null || true
+    fi
+
+    if getent passwd "$user_name" >/dev/null 2>&1; then
+        chown -R "$user_name:$user_name" \
+            "$home_dir/.config" "$home_dir/.local" "$home_dir/Desktop" \
+            2>/dev/null || true
+    fi
+}
+
+Config ()
+{
+    if [ -d /home ]; then
+        for home_dir in /home/*; do
+            [ -d "$home_dir" ] || continue
+            copy_skel_to_home "$home_dir"
+        done
+    fi
+
+    mkdir -p /var/lib/live/config
+    touch /var/lib/live/config/nonla-default-settings
+}
+
+Cmdline
+Init
+Config

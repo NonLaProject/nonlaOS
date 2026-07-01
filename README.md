@@ -48,11 +48,13 @@ artwork/    artwork source sau này
 - `nonla-desktop`: metapackage kéo KDE desktop stack, app cơ bản và các package
   nhận diện/cấu hình của nonlaOS.
 - `nonla-branding`: logo, icon và metadata nhận diện riêng của nonlaOS, chưa
-  thay thế `/etc/os-release`.
+  thay thế `/etc/os-release`. Package cũng ship ASCII/ANSI logo màu sinh từ
+  `img/boot_logo.png` bằng `tools/generate-ascii-logo.py`.
 - `nonla-look`: wallpaper, KDE color scheme `Nonla`, look-and-feel skeleton,
   SDDM theme, Plymouth theme.
 - `nonla-default-settings`: seed cấu hình user mới qua `/etc/skel`, bật FCITX5
-  qua `/etc/environment.d`, không ghi đè user hiện có.
+  qua `/etc/environment.d`, cấu hình fastfetch/neofetch, không ghi đè user hiện
+  có.
 - `nonla-calamares-config`: cấu hình Calamares ban đầu, branding installer
   nonlaOS và launcher `Install nonlaOS` cho live session.
 - `nonla-repo-keyring`: public archive key để verify APT repo nonlaOS.
@@ -248,6 +250,10 @@ Live ISO branding được apply bằng live-build hooks trong `iso/config/hooks
 
 - seed config KDE từ `/etc/skel` sang live user nếu home đã tồn tại trong
   chroot
+- chạy live-config component `9998-nonla-default-settings` lúc boot để seed
+  wallpaper/theme/launcher cho live user sau khi `/home/user` đã được tạo
+- đặt `/usr/lib/os-release`, `/etc/os-release` và `/etc/lsb-release` của live
+  ISO thành nonlaOS để fetch tools hiển thị đúng distro
 - đặt Plymouth theme `nonla` nếu Plymouth khả dụng
 - đổi GRUB/live boot menu sang nonlaOS best-effort
 - giữ launcher `Install nonlaOS` trên desktop và trong menu app
@@ -274,6 +280,24 @@ sha256sum -c SHA256SUMS
 
 Local vẫn có thể chạy `./tools/build-iso.sh` nếu môi trường đủ mạnh và có
 `live-build`, nhưng CI là môi trường build ISO chính thức.
+
+## Generate terminal logo
+
+ASCII/ANSI logo cho fastfetch/neofetch được generate từ asset thật:
+
+```bash
+sudo apt-get install -y python3-pil
+python3 tools/generate-ascii-logo.py
+```
+
+Generator dùng `img/launcher_icon.png`, lấy màu từ pixel PNG thật và render
+bằng ký tự ASCII thường, không dùng block glyph.
+
+Output nằm tại:
+
+```text
+packages/nonla-branding/payload/usr/share/nonlaos/ascii/nonlaos.ansi
+```
 
 ## Tài liệu
 

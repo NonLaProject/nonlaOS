@@ -1,5 +1,5 @@
 nonla-default-settings (0.1.0) unstable; urgency=medium
 
-  * Initial default settings package skeleton.
+  * Add KDE defaults, input method environment and fetch tool user configs.
 
  -- Le Hung Quang Minh <nonlaproject@users.noreply.github.com>  Mon, 29 Jun 2026 00:00:00 +0700

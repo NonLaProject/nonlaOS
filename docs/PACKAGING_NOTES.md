@@ -59,3 +59,10 @@ các file cấu hình trong `/etc/skel`.
 Lý do: package này có mục tiêu rõ ràng là seed cấu hình KDE/FCITX5 cho user mới
 của distro. Cách này không ghi đè cấu hình user hiện có và tránh maintainer
 script sửa home directory runtime.
+
+Package này cũng ship live-config component
+`/usr/lib/live/config/9998-nonla-default-settings`. Lý do: trong live ISO,
+live user thường được tạo trong quá trình boot bởi `live-config`, nên hook
+chroot của live-build có thể chạy quá sớm khi `/home/user` chưa tồn tại.
+Component này chỉ chạy trong môi trường live, sau bước `user-setup`, để copy
+`/etc/skel` vào live home đúng thời điểm.

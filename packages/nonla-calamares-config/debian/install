@@ -1,3 +1,5 @@
 payload/etc/calamares etc/
 payload/etc/skel etc/
+payload/usr/bin usr/
+payload/usr/share/man usr/share/
 payload/usr/share/applications usr/share/

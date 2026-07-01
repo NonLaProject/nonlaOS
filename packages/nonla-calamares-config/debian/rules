@@ -5,4 +5,5 @@
 
 override_dh_fixperms:
 	dh_fixperms
+	chmod 0755 debian/nonla-calamares-config/usr/bin/install-nonlaos
 	chmod 0755 debian/nonla-calamares-config/etc/skel/Desktop/install-nonlaos.desktop

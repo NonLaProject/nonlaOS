@@ -1,6 +1,30 @@
 #!/bin/sh
 set -eu
 
+cat > /usr/lib/os-release <<'EOF'
+PRETTY_NAME="nonlaOS 0.1 Alpha"
+NAME="nonlaOS"
+VERSION_ID="0.1"
+VERSION="0.1 Alpha"
+VERSION_CODENAME="alpha"
+ID=nonlaos
+ID_LIKE=debian
+HOME_URL="https://github.com/NonLaProject/nonlaOS"
+SUPPORT_URL="https://github.com/NonLaProject/nonlaOS/issues"
+BUG_REPORT_URL="https://github.com/NonLaProject/nonlaOS/issues"
+ANSI_COLOR="1;32"
+LOGO=nonlaos
+EOF
+
+ln -sf ../usr/lib/os-release /etc/os-release
+
+cat > /etc/lsb-release <<'EOF'
+DISTRIB_ID=nonlaOS
+DISTRIB_RELEASE=0.1
+DISTRIB_CODENAME=alpha
+DISTRIB_DESCRIPTION="nonlaOS 0.1 Alpha"
+EOF
+
 copy_skel_to_home() {
     home_dir="$1"
     user_name="$(basename "$home_dir")"

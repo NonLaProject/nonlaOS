@@ -17,6 +17,10 @@ Comment:
  These are internal nonlaOS project assets copied or derived from the
  repository's img/ directory.
 
+Files: payload/usr/share/nonlaos/ascii/nonlaos.ansi
+Copyright: 2026 nonlaOS contributors
+License: GPL-3+
+
 License: GPL-3+
  This program is free software: you can redistribute it and/or modify it under
  the terms of the GNU General Public License as published by the Free Software

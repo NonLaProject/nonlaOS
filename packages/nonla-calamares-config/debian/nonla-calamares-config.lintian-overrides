@@ -7,6 +7,3 @@ nonla-calamares-config: package-contains-file-in-etc-skel [etc/skel/Desktop/inst
 # Desktop shortcuts on the desktop need the executable bit so KDE treats them
 # as launchable/trusted files.
 nonla-calamares-config: executable-not-elf-or-script [etc/skel/Desktop/install-nonlaos.desktop]
-
-# calamares is provided by the package dependency, not by this config package.
-nonla-calamares-config: desktop-command-not-in-package calamares [usr/share/applications/install-nonlaos.desktop]

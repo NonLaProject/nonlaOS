@@ -1,22 +1,28 @@
-Window.SetBackgroundTopColor(0.05, 0.12, 0.08);
-Window.SetBackgroundBottomColor(0.02, 0.06, 0.04);
+Window.SetBackgroundTopColor(0.02, 0.08, 0.05);
+Window.SetBackgroundBottomColor(0.00, 0.03, 0.02);
 
-logo_image = Image("boot_logo.png");
+logo_image = Image("boot_logo.png").Scale(220, 220);
 logo_sprite = Sprite(logo_image);
-logo_sprite.SetX(Window.GetX() + Window.GetWidth() / 2 - logo_image.GetWidth() / 2);
-logo_sprite.SetY(Window.GetY() + Window.GetHeight() / 2 - logo_image.GetHeight() / 2 - 56);
 
 name_image = Image.Text("nonlaOS", 0.94, 0.91, 0.78);
 name_sprite = Sprite(name_image);
-name_sprite.SetX(Window.GetX() + Window.GetWidth() / 2 - name_image.GetWidth() / 2);
-name_sprite.SetY(Window.GetY() + Window.GetHeight() / 2 + logo_image.GetHeight() / 2 - 24);
+
+tagline_image = Image.Text("Debian + KDE Plasma", 0.56, 0.67, 0.45);
+tagline_sprite = Sprite(tagline_image);
 
 fun refresh_callback()
 {
-    logo_sprite.SetX(Window.GetX() + Window.GetWidth() / 2 - logo_image.GetWidth() / 2);
-    logo_sprite.SetY(Window.GetY() + Window.GetHeight() / 2 - logo_image.GetHeight() / 2 - 56);
-    name_sprite.SetX(Window.GetX() + Window.GetWidth() / 2 - name_image.GetWidth() / 2);
-    name_sprite.SetY(Window.GetY() + Window.GetHeight() / 2 + logo_image.GetHeight() / 2 - 24);
+    center_x = Window.GetX() + Window.GetWidth() / 2;
+    center_y = Window.GetY() + Window.GetHeight() / 2;
+
+    logo_sprite.SetX(center_x - logo_image.GetWidth() / 2);
+    logo_sprite.SetY(center_y - logo_image.GetHeight() / 2 - 48);
+
+    name_sprite.SetX(center_x - name_image.GetWidth() / 2);
+    name_sprite.SetY(center_y + logo_image.GetHeight() / 2 - 16);
+
+    tagline_sprite.SetX(center_x - tagline_image.GetWidth() / 2);
+    tagline_sprite.SetY(center_y + logo_image.GetHeight() / 2 + 34);
 }
 
 Plymouth.SetRefreshFunction(refresh_callback);
