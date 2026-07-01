@@ -6,6 +6,7 @@ NOTICE text eol=lf
 CODEOWNERS text eol=lf
 *.md text eol=lf
 *.sh text eol=lf
+*.py text eol=lf
 *.hook.* text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf

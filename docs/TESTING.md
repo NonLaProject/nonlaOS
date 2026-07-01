@@ -8,10 +8,15 @@
 - [ ] Plymouth/boot splash dùng nonla nếu khả dụng.
 - [ ] Live desktop vào được.
 - [ ] KDE live session dùng wallpaper nonla.
+- [ ] `/var/lib/live/config/nonla-default-settings` tồn tại trong live session.
+- [ ] `~/.config/plasma-org.kde.plasma.desktop-appletsrc` trỏ tới
+  `/usr/share/wallpapers/nonla-default`.
 - [ ] KDE live session dùng color scheme `Nonla` nếu Plasma nhận config.
 - [ ] Desktop có shortcut `Install nonlaOS`.
 - [ ] Menu app có `Install nonlaOS`.
 - [ ] Calamares mở được.
+- [ ] `fastfetch` hiển thị `nonlaOS 0.1 Alpha` và logo ANSI màu nonlaOS.
+- [ ] Nếu có `neofetch`, logo ANSI màu và thông tin distro hiển thị đúng.
 - [ ] Installer mở được.
 - [ ] Cài vào VM thành công.
 - [ ] Reboot vào hệ đã cài.
@@ -54,6 +59,17 @@
 - [ ] `/usr/share/applications/install-nonlaos.desktop` tồn tại.
 - [ ] `/etc/skel/Desktop/install-nonlaos.desktop` tồn tại và executable.
 - [ ] `calamares` mở với branding nonlaOS.
+- [ ] `install-nonlaos` mở Calamares qua `pkexec`.
+
+## Fetch Tool Checklist
+
+- [ ] `/usr/share/nonlaos/ascii/nonlaos.ansi` tồn tại.
+- [ ] File ASCII/ANSI được sinh từ `img/launcher_icon.png` bằng
+  `tools/generate-ascii-logo.py`, không vẽ tay.
+- [ ] Logo terminal dùng ký tự ASCII thường, không dùng block glyph.
+- [ ] `fastfetch` dùng logo `/usr/share/nonlaos/ascii/nonlaos.ansi`.
+- [ ] `fastfetch` đọc OS là `nonlaOS 0.1 Alpha`.
+- [ ] Nếu cài `neofetch`, config user mới dùng cùng logo ANSI.
 
 ## Branding Checklist
 

@@ -31,6 +31,7 @@ Depends:
  fonts-noto-color-emoji,
  fcitx5,
  fcitx5-unikey,
+ fastfetch,
  ufw
 Recommends:
  kcm-fcitx5

@@ -8,7 +8,7 @@ Rules-Requires-Root: no
 
 Package: nonla-calamares-config
 Architecture: all
-Depends: ${misc:Depends}, calamares
+Depends: ${misc:Depends}, calamares, pkexec
 Description: nonlaOS Calamares installer configuration
  Provides the initial nonlaOS Calamares installer settings, branding and
  live-session launcher.

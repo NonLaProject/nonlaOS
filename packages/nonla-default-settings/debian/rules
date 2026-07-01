@@ -2,3 +2,7 @@
 
 %:
 	dh $@
+
+override_dh_fixperms:
+	dh_fixperms
+	chmod 0755 debian/nonla-default-settings/usr/lib/live/config/9998-nonla-default-settings
