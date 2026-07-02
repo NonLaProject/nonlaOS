@@ -62,6 +62,8 @@
 - [ ] `/usr/share/applications/install-nonlaos.desktop` tồn tại.
 - [ ] `/etc/skel/Desktop/install-nonlaos.desktop` tồn tại và executable.
 - [ ] `branding.desc` có key `slideshow: show.qml`.
+- [ ] `settings.conf` không gọi module ngoài Calamares core như
+  `dpkg-unsafe-io`, `sources-media`, `bootloader-config`.
 - [ ] `calamares` mở với branding nonlaOS.
 - [ ] `install-nonlaos` mở Calamares qua `pkexec`.
 
